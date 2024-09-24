@@ -1,9 +1,5 @@
 <x-app-layout>
     <div class="w-full px-4 py-8 mx-auto sm:px-6 lg:px-8 max-w-9xl">
-
-
-
-
         <div class="card laporan-tabel" id="laporan-masuk">
             <div class="text-xl text-white bg-gray-400 card-header">Daftar User</div>
             <div class="card-body">

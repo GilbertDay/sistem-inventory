@@ -24,7 +24,10 @@ use App\Http\Controllers\Controller;
 Route::redirect('/', 'login');
 Route::get('/home', [Controller::class, 'index']);
 
-Route::get('/users', [UserController::class, 'index'])->name('users');
+
+Route::get('/dashboard', function () {
+    return view('pages/admin/dashboard');
+});
 
 
 Route::middleware(['auth:sanctum', 'user-access:2', 'verified'])->group(function () {
