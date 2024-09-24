@@ -24,6 +24,9 @@ use App\Http\Controllers\Controller;
 Route::redirect('/', 'login');
 Route::get('/home', [Controller::class, 'index']);
 
+Route::get('/users', [UserController::class, 'index'])->name('users');
+
+
 Route::middleware(['auth:sanctum', 'user-access:2', 'verified'])->group(function () {
 
     Route::get('/users', [UserController::class, 'index'])->name('users');
