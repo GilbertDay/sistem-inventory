@@ -27,7 +27,44 @@ Route::get('/home', [Controller::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('pages/admin/dashboard');
-});
+})->name('dashboard');
+
+Route::get('/dataBarang', function () {
+    return view('pages/admin/dataBarang');
+})->name('dataBarang');
+Route::get('/jenisBarang', function () {
+    return view('pages/admin/jenisBarang');
+})->name('jenisBarang');
+
+Route::get('/barangMasuk', function () {
+    return view('pages/admin/barangMasuk');
+})->name('barangMasuk');
+Route::get('/barangKeluar', function () {
+    return view('pages/admin/barangKeluar');
+})->name('barangKeluar');
+
+Route::get('/laporanStok', function () {
+    return view('pages/admin/laporanStok');
+})->name('laporanStok');
+Route::get('/laporanBarangMasuk', function () {
+    return view('pages/admin/laporanBarangMasuk');
+})->name('laporanBarangMasuk');
+Route::get('/laporanBarangKeluar', function () {
+    return view('pages/admin/laporanBarangKeluar');
+})->name('laporanBarangKeluar');
+
+Route::get('/users', function () {
+    return view('pages/admin/users');
+})->name('users');
+
+Route::get('/peminjam', function () {
+    return view('pages/admin/peminjam');
+})->name('peminjam');
+Route::get('/supplier', function () {
+    return view('pages/admin/supplier');
+})->name('supplier');
+
+
 
 
 Route::middleware(['auth:sanctum', 'user-access:2', 'verified'])->group(function () {

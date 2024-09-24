@@ -25,11 +25,9 @@
             <div class="font-medium text-gray-800 dark:text-gray-100">{{ Auth::user()->name }}</div>
             <div class="text-xs italic text-gray-500 dark:text-gray-400">
                 @if(Auth::user()->type == 0)
-                Mahasiswa
-                @elseif(Auth::user()->type == 1)
-                Dosen
+                Users
                 @else
-                Admin
+                Administrator
                 @endif
             </div>
         </div>

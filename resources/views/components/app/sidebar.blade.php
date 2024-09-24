@@ -5,14 +5,14 @@
 
     <!-- Sidebar -->
     <div id="sidebar"
-        class="flex lg:!flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-[100dvh] overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-white dark:bg-gray-800 p-4 transition-all duration-200 ease-in-out {{ $variant === 'v2' ? 'border-r border-gray-200 dark:border-gray-700/60' : 'rounded-r-2xl shadow-sm' }}"
+        class="flex lg:!flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-[100dvh] overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-28 lg:sidebar-expanded:!w-72 2xl:!w-72 shrink-0 bg-white dark:bg-gray-800 p-4 transition-all duration-200 ease-in-out {{ $variant === 'v2' ? 'border-r border-gray-200 dark:border-gray-700/60' : 'rounded-r-2xl shadow-sm' }}"
         :class="sidebarOpen ? 'max-lg:translate-x-0' : 'max-lg:-translate-x-64'" @click.outside="sidebarOpen = false"
         @keydown.escape.window="sidebarOpen = false">
 
         <!-- Sidebar header -->
         <div class="flex justify-between pr-3 mb-10 sm:px-2">
             <!-- Close button -->
-            <button class="text-gray-500 lg:hidden hover:text-gray-400" @click.stop="sidebarOpen = !sidebarOpen"
+            <button class="text-gray-500 lg:hidden hover:text-gray-600" @click.stop="sidebarOpen = !sidebarOpen"
                 aria-controls="sidebar" :aria-expanded="sidebarOpen">
                 <span class="sr-only">Close sidebar</span>
                 <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -20,8 +20,8 @@
                 </svg>
             </button>
             <!-- Logo -->
-            <a class="flex items-center justify-center w-full" href="{{ route('users') }}">
-                <img class="" src="{{ asset('images/logo-lppm.png') }}" alt="LPPM_Logo" width="80" height="80" />
+            <a class="flex items-center justify-center w-full" href="{{ route('dashboard') }}">
+                <img class="" src="{{ asset('images/logo-jbg.png') }}" alt="JBGLogo" width="100" height="100" />
                 <!-- <svg class="fill-violet-500" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
                     <path
                         d="M31.956 14.8C31.372 6.92 25.08.628 17.2.044V5.76a9.04 9.04 0 0 0 9.04 9.04h5.716ZM14.8 26.24v5.716C6.92 31.372.63 25.08.044 17.2H5.76a9.04 9.04 0 0 1 9.04 9.04Zm11.44-9.04h5.716c-.584 7.88-6.876 14.172-14.756 14.756V26.24a9.04 9.04 0 0 1 9.04-9.04ZM.044 14.8C.63 6.92 6.92.628 14.8.044V5.76a9.04 9.04 0 0 1-9.04 9.04H.044Z" />
@@ -33,15 +33,185 @@
         <div class="space-y-8">
             <!-- Pages group -->
             <div>
-                <h3 class="pl-3 text-xs font-semibold text-gray-400 uppercase dark:text-gray-500">
-                    <span class="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
-                        aria-hidden="true">•••</span>
-                    <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Menu</span>
-                </h3>
-                <ul class="mt-3">
-                    @if(Auth::user()->type == 2)
+                <ul class="">
+                    @if(Auth::user()->type == 1)
                     <!-- Users -->
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['users'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif"
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['dashboard'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['dashboard']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['dashboard'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('dashboard') }}">
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-regular fa-user shrink-0 fill-current @if(in_array(Request::segment(1), ['dashboard'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['dashboard'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Dashboard</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+
+                    <h3 class="pl-3 my-2 text-xs font-semibold text-gray-400 uppercase dark:text-gray-500">
+                        <span class="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
+                            aria-hidden="true">•••</span>
+                        <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Barang</span>
+                    </h3>
+
+
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['dataBarang'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['dataBarang']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['dataBarang'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('dataBarang') }}">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-brands fa-fort-awesome shrink-0 fill-current @if(in_array(Request::segment(1), ['dataBarang'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['dataBarang'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Data
+                                            Barang</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+
+
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['jenisBarang'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['jenisBarang']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['jenisBarang'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('jenisBarang') }}">
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['jenisBarang'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['jenisBarang'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Jenis
+                                            Barang</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+                    <h3 class="pl-3 my-2 text-xs font-semibold text-gray-400 uppercase dark:text-gray-500">
+                        <span class="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
+                            aria-hidden="true">•••</span>
+                        <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Transaksi</span>
+                    </h3>
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['barangMasuk'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['barangMasuk']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['barangMasuk'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('barangMasuk') }}">
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['barangMasuk'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['barangMasuk'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Barang
+                                            Masuk</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['barangKeluar'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['barangKeluar']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['barangKeluar'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('barangKeluar') }}">
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['barangKeluar'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['barangKeluar'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Barang
+                                            Keluar</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+                    <h3 class="pl-3 my-2 text-xs font-semibold text-gray-400 uppercase dark:text-gray-500">
+                        <span class="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
+                            aria-hidden="true">•••</span>
+                        <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Barang</span>
+                    </h3>
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['laporanStok'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['laporanStok']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['laporanStok'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('laporanStok') }}">
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['laporanStok'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['laporanStok'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Laporan
+                                            Stok Opname</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['laporanBarangMasuk'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['laporanBarangMasuk']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['laporanBarangMasuk'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('laporanBarangMasuk') }}">
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['laporanBarangMasuk'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['laporanBarangMasuk'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Laporan
+                                            Barang Masuk</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['laporanBarangKeluar'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['laporanBarangKeluar']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['laporanBarangKeluar'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('laporanBarangKeluar') }}">
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['laporanBarangKeluar'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['laporanBarangKeluar'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Laporan
+                                            Barang Keluar</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+                    <h3 class="pl-3 my-2 text-xs font-semibold text-gray-400 uppercase dark:text-gray-500">
+                        <span class="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
+                            aria-hidden="true">•••</span>
+                        <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Manajemen User</span>
+                    </h3>
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['users'])){{ 'bg-[#283593]' }}@endif"
                         x-data="{ open: {{ in_array(Request::segment(1), ['users']) ? 1 : 0 }} }">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['users'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
                             @click.prevent="open = !open; sidebarExpanded = true">
@@ -49,28 +219,11 @@
 
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center">
-                                        <i class="fa-regular fa-user shrink-0 fill-current @if(in_array(Request::segment(1), ['users'])){{ 'text-violet-500' }}@else{{ 'text-gray-400 dark:text-gray-500' }}@endif""></i>
-                                        <span
-                                            class="ml-4 text-sm font-medium duration-200  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Users</span>
-                                    </div>
-
-                                </div>
-                            </a>
-                        </a>
-                    </li>
-
-                    <!-- Padukuhan -->
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['padukuhan'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif"
-                        x-data="{ open: {{ in_array(Request::segment(1), ['padukuhan']) ? 1 : 0 }} }">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['padukuhan'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            @click.prevent="open = !open; sidebarExpanded = true">
-                            <a href="{{ route('padukuhan') }}">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
                                         <i
-                                            class="fa-brands fa-fort-awesome shrink-0 fill-current @if(in_array(Request::segment(1), ['padukuhan'])){{ 'text-violet-500' }}@else{{ 'text-gray-400 dark:text-gray-500' }}@endif"></i>
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['users'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
                                         <span
-                                            class="ml-4 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Padukuhan</span>
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['users'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Data
+                                            User</span>
                                     </div>
 
                                 </div>
@@ -78,132 +231,68 @@
                         </a>
                     </li>
 
-                    <!-- Kelompoks -->
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['kelompok'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif"
-                        x-data="{ open: {{ in_array(Request::segment(1), ['kelompok']) ? 1 : 0 }} }">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['kelompok'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                    <div class="border-2 border-[#283593] mx-7 my-3"></div>
+
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['peminjam'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['peminjam']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['peminjam'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
                             @click.prevent="open = !open; sidebarExpanded = true">
-                            <a href="{{ route('kelompok') }}">
+                            <a href="{{ route('peminjam') }}">
 
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center">
                                         <i
-                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['kelompok'])){{ 'text-violet-500' }}@else{{ 'text-gray-400 dark:text-gray-500' }}@endif"></i>
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['peminjam'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
                                         <span
-                                            class="ml-4 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Kelompok</span>
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['peminjam'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Peminjam</span>
                                     </div>
 
                                 </div>
                             </a>
                         </a>
                     </li>
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['supplier'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['supplier']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['supplier'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('supplier') }}">
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['supplier'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['supplier'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Supplier</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+
+
                     @endif
 
-                    @if(Auth::user()->type == 1)
-                    <!-- Dosen -->
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['cekLaporan'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif"
-                        x-data="{ open: {{ in_array(Request::segment(1), ['cekLaporan']) ? 1 : 0 }} }">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['cekLaporan'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            @click.prevent="open = !open; sidebarExpanded = true">
-                            <a href="{{ route('cekLaporan') }}">
-
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i
-                                            class="fa-solid fa-book-open shrink-0 fill-current @if(in_array(Request::segment(1), ['cekLaporan'])){{ 'text-violet-500' }}@else{{ 'text-gray-400 dark:text-gray-500' }}@endif"></i>
-                                        <span
-                                            class="ml-4 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Cek
-                                            Laporan</span>
-                                    </div>
-
-                                </div>
-                            </a>
-                        </a>
-                    </li>
-
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['cekLogbook'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif"
-                        x-data="{ open: {{ in_array(Request::segment(1), ['cekLogbook']) ? 1 : 0 }} }">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['cekLogbook'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            @click.prevent="open = !open; sidebarExpanded = true">
-                            <a href="{{ route('cekLogbook') }}">
-
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i
-                                            class="fa-regular fa-file-lines shrink-0 fill-current @if(in_array(Request::segment(1), ['cekLogbook'])){{ 'text-violet-500' }}@else{{ 'text-gray-400 dark:text-gray-500' }}@endif"></i>
-                                        <span
-                                            class="ml-4 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Cek
-                                            Logbook</span>
-                                    </div>
-
-                                </div>
-                            </a>
-                        </a>
-                    </li>
-                    <!-- End Dosen -->
-                    @endif
-
-                    @if(Auth::user()->type == 0)
-                    @if(DB::table('kelompoks')->where('ketua_id', Auth::user()->id)->exists())
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['laporan'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif"
-                        x-data="{ open: {{ in_array(Request::segment(1), ['laporan']) ? 1 : 0 }} }">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['laporan'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            @click.prevent="open = !open; sidebarExpanded = true">
-                            <a href="{{ route('laporan') }}">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i
-                                            class="fa-solid fa-book-open shrink-0 fill-current @if(in_array(Request::segment(1), ['laporan'])){{ 'text-violet-500' }}@else{{ 'text-gray-400 dark:text-gray-500' }}@endif"></i>
-                                        <span
-                                            class="ml-4 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                                            Laporan</span>
-                                    </div>
-
-                                </div>
-                            </a>
-                        </a>
-                    </li>
-                    @endif
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['logbook'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif"
-                        x-data="{ open: {{ in_array(Request::segment(1), ['logbook']) ? 1 : 0 }} }">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['logbook'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            @click.prevent="open = !open; sidebarExpanded = true">
-                            <a href="{{ route('logbook') }}">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i
-                                            class="fa-regular fa-file-lines shrink-0 fill-current @if(in_array(Request::segment(1), ['logbook'])){{ 'text-violet-500' }}@else{{ 'text-gray-400 dark:text-gray-500' }}@endif"></i>
-                                        <span
-                                            class="ml-4 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                                            Logbook</span>
-                                    </div>
-
-                                </div>
-                            </a>
-                        </a>
-                    </li>
-
-                    @endif
 
                 </ul>
             </div>
         </div>
 
         <!-- Expand / collapse button -->
-        <div class="justify-end hidden pt-3 mt-auto lg:inline-flex 2xl:hidden">
+        <!-- <div class="justify-end hidden pt-3 mt-auto lg:inline-flex 2xl:hidden">
             <div class="w-12 py-2 pl-4 pr-3">
                 <button
-                    class="text-gray-400 transition-colors hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400"
+                    class="text-gray-600 transition-colors hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-600"
                     @click="sidebarExpanded = !sidebarExpanded">
                     <span class="sr-only">Expand / collapse sidebar</span>
-                    <svg class="text-gray-400 fill-current shrink-0 dark:text-gray-500 sidebar-expanded:rotate-180"
+                    <svg class="text-gray-600 fill-current shrink-0 dark:text-gray-500 sidebar-expanded:rotate-180"
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                         <path
                             d="M15 16a1 1 0 0 1-1-1V1a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1ZM8.586 7H1a1 1 0 1 0 0 2h7.586l-2.793 2.793a1 1 0 1 0 1.414 1.414l4.5-4.5A.997.997 0 0 0 12 8.01M11.924 7.617a.997.997 0 0 0-.217-.324l-4.5-4.5a1 1 0 0 0-1.414 1.414L8.586 7M12 7.99a.996.996 0 0 0-.076-.373Z" />
                     </svg>
                 </button>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </div>
