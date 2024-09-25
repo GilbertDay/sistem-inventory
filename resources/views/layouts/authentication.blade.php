@@ -38,34 +38,21 @@
         <div class="relative flex">
 
             <!-- Content -->
-            <div class="w-full md:w-1/2">
+            <div class="w-full bg-[#283593]">
 
-                <div class="min-h-[100dvh] h-full flex flex-col after:flex-1">
-
-                    <!-- Header -->
-                    <div class="flex-1">
-                        <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-                            <!-- Logo -->
-                            <a class="block mt-10" href="{{ route('users') }}">
-                                <img class="" src="{{ asset('images/logo-lppm.png') }}" alt="LPPM_Logo" width="80"
-                                    height="80" />
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="w-full max-w-sm px-4 py-8 mx-auto">
+                <div class="min-h-[100dvh] h-full flex flex-col justify-center ">
+                    <div class="w-full max-w-sm px-4 py-8 mx-auto bg-[#90CAF9] rounded-2xl">
                         {{ $slot }}
                     </div>
-
                 </div>
 
             </div>
 
             <!-- Image -->
-            <div class="absolute top-0 bottom-0 right-0 hidden md:block md:w-1/2" aria-hidden="true">
-                <img class="object-cover object-center w-full h-full" src="{{ asset('images/LPPM.jpg') }}" width="760"
+            <!-- <div class="absolute top-0 bottom-0 right-0 hidden md:block md:w-1/2" aria-hidden="true">
+                <img class="object-cover object-center w-full h-full" src="{{ asset('images/logo.jpg') }}" width="760"
                     height="1024" alt="Authentication image" />
-            </div>
+            </div> -->
 
         </div>
 

@@ -1,5 +1,7 @@
 <x-authentication-layout>
-    <h1 class="mb-6 text-3xl font-bold text-gray-800 dark:text-gray-100">{{ __('Welcome back!') }}</h1>
+    <div class="flex justify-center mb-6">
+        <img class="" src="{{ asset('images/logo-jbg.png') }}" alt="LPPM_Logo" width="130" height="130" />
+    </div>
     @if (session('status'))
     <div class="mb-4 text-sm font-medium text-green-600">
         {{ session('status') }}
@@ -26,8 +28,8 @@
                 </a> -->
         </div>
         @endif
-        <x-button class="flex w-full">
-            {{ __('Sign in') }}
+        <x-button class="flex w-full bg-[#1A237E]">
+            {{ __('Login') }}
         </x-button>
         </div>
     </form>
