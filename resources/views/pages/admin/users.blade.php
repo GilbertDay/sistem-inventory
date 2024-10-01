@@ -8,8 +8,8 @@
                         <label for="roleFilter" class="form-label">Filter by Role</label>
                         <select id="roleFilter" class="form-select">
                             <option value="all">All</option>
-                            <option value="User">User</option>
-                            <option value="Dosen">Dosen</option>
+                            <option value="User">Staff</option>
+                            <option value="Dosen">Kepala Dept IT</option>
                             <option value="Admin">Admin</option>
                         </select>
                     </div>
@@ -31,28 +31,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $user=>$u)
-                        <tr data-role="{{$u->type == 0 ? 'User' :( $u->type == 1 ? 'Dosen' : 'Admin')}}">
-                            <td>{{ $user + 1 }}</td>
-                            <td>{{$u->name}}</td>
-                            <td>{{$u->email}}</td>
-                            <td>{{$u->updated_at}}</td>
-                            <td>{{$u->type == 0 ? 'User' :( $u->type == 1 ? 'Dosen' : 'Admin')}}</td>
-                            <td>
-                                <!-- <a type="button" class="p-2 text-black bg-yellow-400 rounded-lg"><i
-                                        class="mr-1 fa-solid fa-eye"></i>View</a> -->
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#editUsers{{$u->id}}"
-                                    class="p-2 text-black bg-yellow-400 rounded-lg">Edit</button>
-                                <!-- Trigger the modal with a button -->
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#hapusUsers{{ $u->id }}"
-                                    class="p-2 text-black bg-red-500 rounded-lg">Hapus</button>
-                            </td>
-                        </tr>
 
-                        @endforeach
                     </tbody>
                 </table>
-                {{ $users->links() }}
             </div>
         </div>
 
