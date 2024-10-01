@@ -4,8 +4,8 @@
             <a href="{{route('dashboard')}}">
                 <i class="fa-solid fa-house"></i>
             </a>
-            <div class="flex items-center gap-3 text-lg"><i class="fa-solid fa-chevron-right"></i>Transaksi<i
-                    class="fa-solid fa-chevron-right"></i>Barang Keluar</div>
+            <div class="flex items-center gap-3 text-lg"><i class="fa-solid fa-chevron-right"></i>Laporan<i
+                    class="fa-solid fa-chevron-right"></i>Stok Opname</div>
         </div>
         <div class="flex justify-end">
 

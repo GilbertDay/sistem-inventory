@@ -49,7 +49,6 @@
                                         <span
                                             class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['dashboard'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Dashboard</span>
                                     </div>
-
                                 </div>
                             </a>
                         </a>
@@ -144,6 +143,8 @@
                             </a>
                         </a>
                     </li>
+                    @endif
+                    @if(Auth::user()->type ==0 || Auth::user()->type == 1)
                     <h3 class="pl-3 my-2 text-xs font-semibold text-gray-400 uppercase dark:text-gray-500">
                         <span class="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
                             aria-hidden="true">•••</span>
@@ -206,6 +207,9 @@
                             </a>
                         </a>
                     </li>
+                    @endif
+                    @if(Auth::user()->type == 1)
+
                     <h3 class="pl-3 my-2 text-xs font-semibold text-gray-400 uppercase dark:text-gray-500">
                         <span class="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
                             aria-hidden="true">•••</span>
@@ -269,10 +273,32 @@
                             </a>
                         </a>
                     </li>
-
-
                     @endif
+                    @if(Auth::user()->type == 0)
+                    <h3 class="pl-3 my-2 text-xs font-semibold text-gray-400 uppercase dark:text-gray-500">
+                        <span class="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
+                            aria-hidden="true">•••</span>
+                        <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Pengajuan</span>
+                    </h3>
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['permohonan'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['permohonan']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['permohonan'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                            <a href="{{ route('permohonan') }}">
 
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['permohonan'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                        <span
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['permohonan'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Permohonan</span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </a>
+                    </li>
+                    @endif
 
                 </ul>
             </div>
