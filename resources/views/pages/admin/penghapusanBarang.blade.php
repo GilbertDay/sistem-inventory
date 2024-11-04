@@ -10,7 +10,7 @@
         @if(Auth::user()->type == 1)
             <div class="flex justify-end">
                 <button type="button" class="btn flex gap-2 bg-[#283593] text-white" data-bs-toggle="modal"
-                    data-bs-target="#tambahBarang">
+                    data-bs-target="#tambahPenghapusanBarang">
                     <i class="fa-regular fa-square-plus"></i>
                     Tambah
                 </button>
@@ -62,63 +62,56 @@
         </div>
     </div>
 
-    <div class="modal fade" id="tambahBarang" tabindex="-1" aria-labelledby="tambahBarangLabel"
+    <div class="modal fade" id="tambahPenghapusanBarang" tabindex="-1" aria-labelledby="tambahPenghapusanBarangLabel"
     aria-hidden="false">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tambahBarangLabel">Tambah Barang</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahPenghapusanBarangLabel">Tambah Penghapusan Barang</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('tambahBarang') }}" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="flex gap-3 mb-3">
+                            <div>
+                                <label for="nama-barang" class="form-label">Nama Barang</label>
+                                <input type="text" class="form-control" name="nama-barang" id="nama-barang" rows="3" />
+                            </div>
+                            <div>
+                                <label for="lokasi-barang" class="form-label">Lokasi Barang</label>
+                                <input type="text" class="form-control" name="lokasi-barang" id="lokasi-barang" rows="3" />
+                            </div>
+                        </div>
+
+                        <div class="flex w-full gap-3 mb-3">
+                            <div class="w-1/2">
+                                <label for="tanggal-hapus" class="form-label">Tanggal</label>
+                                <input type="date" class="form-control" name="tanggal-hapus" id="tanggal-hapus" rows="3" />
+                            </div>
+                            <div class="w-1/2">
+                                <label for="jumlah-barang" class="form-label">Jumlah Barang</label>
+                                <input type="number" class="form-control" name="jumlah-barang" id="jumlah-barang" rows="3" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="ket-hapus" class="form-label">Keterangan</label>
+                            <div>
+                                <select name="ket-hapus" id="" class="w-full">
+                                    <option value="Elektronik">Ganti Baru</option>
+                                    <option value="Furniture">Furniture</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
-            <form action="{{ route('tambahBarang') }}" method="POST" enctype="multipart/form-data">
-                <div class="modal-body">
-                    @csrf
-
-
-                    <div class="flex gap-3 mb-3">
-                        <div>
-                            <label for="nama-barang" class="form-label">Nama Barang</label>
-                        <input type="text" class="form-control" name="nama-barang" id="nama-barang" rows="3" />
-                        </div>
-                        <div>
-                            <label for="stok-barang" class="form-label">Stok Minimum</label>
-                            <input type="text" class="form-control" name="stok-barang" id="stok-barang" rows="3" />
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="jenis-barang" class="form-label">Jenis Barang</label>
-                        <div>
-                            <select name="jenis-barang" id="" class="w-full">
-                                <option value="Elektronik">Elektronik</option>
-                                <option value="Furniture">Furniture</option>
-                                <option value="Lainnya">Lainnya</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-3 mb-3">
-                        <div> <label for="lokasi-barang" class="form-label">Lokasi Barang</label>
-                        <input type="text" class="form-control" name="lokasi-barang" id="lokasi-barang" rows="3" />
-                    </div>
-                        <div>
-                            <label for="jumlah-barang" class="form-label">Jumlah Barang</label>
-                            <input type="number" class="form-control" name="jumlah-barang" id="jumlah-barang" rows="3" />
-                        </div>
-                    </div>
-
-
-                        <label for="foto" class="form-label">Foto Barang</label>
-                        <div class="p-3 bg-slate-100 rounded-2xl">
-
-                            <input type="file" class="form-control" name="foto" id="foto" rows="3" />
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 </x-app-layout>

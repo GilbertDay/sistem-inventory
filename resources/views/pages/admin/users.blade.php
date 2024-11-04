@@ -48,7 +48,7 @@
                     <h5 class="modal-title" id="tambahUsersLabel">Tambah Users</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('addUsers') }}" method="POST">
+                <form action="{{ route('tambahUsers') }}" method="POST">
                     <div class="modal-body">
                         @csrf
 
@@ -84,78 +84,6 @@
             </div>
         </div>
     </div>
-
-    @foreach ($users as $u)
-    <div class="modal fade" id="editUsers{{$u->id}}" tabindex="-1" aria-labelledby="editUsersLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editUsersLabel">Edit Users</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('editUsers') }}" method="POST">
-                    <div class="modal-body">
-                        @csrf
-                        <input type="text" class="form-control" id="id" name="id" value="{{$u->id}}" hidden>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{$u->name}}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{$u->email}}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="password" name="password"
-                                    value="{{$u->plain_password}}">
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="role" class="form-label">Jenis User</label>
-                            <select class="form-select" id="role" name="role">
-                                <option value="0">User</option>
-                                <option value="1">Dosen</option>
-                                <option value="2">Admin</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="hapusUsers{{$u->id}}" tabindex="-1" aria-labelledby="hapusUsersLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="hapusUsersLabel">Hapus Users</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('hapusUsers') }}" method="POST">
-                    <div class="modal-body">
-                        @csrf
-                        <input type="text" class="form-control" id="id" name="id" value="{{$u->id}}" hidden>
-                        <p>Apakah anda yakin ingin menghapus user ini?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    @endforeach
 
     <script>
         document.getElementById('roleFilter').addEventListener('change', function () {

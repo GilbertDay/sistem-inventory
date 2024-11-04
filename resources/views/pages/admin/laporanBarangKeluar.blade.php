@@ -8,6 +8,15 @@
                     class="fa-solid fa-chevron-right"></i>Barang Keluar</div>
         </div>
 
+        <div class="flex justify-end">
+
+            <button type="button" class="btn flex gap-2 bg-[#283593] text-white" data-bs-toggle="modal"
+                data-bs-target="#tambahLaporanBarangKeluar">
+                <i class="fa-regular fa-square-plus"></i>
+                Tambah
+            </button>
+        </div>
+
         <div class="flex flex-col gap-4">
             <div class="card bg-[#90caf96c]">
                 <div class="text-xl text-white bg-[#283593] card-header">Laporan Data Barang Keluar</div>
@@ -75,7 +84,42 @@
 
             </div>
         </div>
+    </div>
 
+
+    <div class="modal fade" id="tambahLaporanBarangKeluar" tabindex="-1" aria-labelledby="tambahLaporanBarangKeluarLabel"
+    aria-hidden="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahLaporanBarangKeluarLabel">Tambah Laporan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('tambahJenisBarang') }}" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        @csrf
+                        <div>
+                            <label for="nama-barang" class="form-label">Nama Barang</label>
+                            <input type="text" class="form-control" name="nama-barang" id="nama-barang" rows="3" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="nama-barang" class="form-label">Nama Barang</label>
+                            <div>
+                                <select name="nama-barang" id="" class="w-full">
+                                    <option value="Elektronik">Laptop Asus</option>
+                                    <option value="Furniture">Laptop Lenovo</option>
+                                    <option value="Lainnya">Printer HP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>

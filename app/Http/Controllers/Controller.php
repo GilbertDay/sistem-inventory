@@ -18,6 +18,8 @@ class Controller extends BaseController
             return redirect('/dashboard');
         } else if (Auth::user()->type == 0) {
             return redirect('/laporanStok');
+        }else if (Auth::user()->type == 2) {
+            return redirect('/dashboard');
         }
     }
 }

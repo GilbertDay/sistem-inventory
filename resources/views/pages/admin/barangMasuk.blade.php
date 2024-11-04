@@ -50,6 +50,57 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="modal fade" id="tambahBarangMasuk" tabindex="-1" aria-labelledby="tambahBarangMasukLabel"
+    aria-hidden="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahBarangMasukLabel">Tambah Baarang</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('tambahJenisBarang') }}" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="flex w-full gap-3 mb-3">
+                            <div class="w-1/2">
+                                <label for="nama-barang" class="form-label">Nama Barang</label>
+                                <div >
+                                    <select name="nama-barang" id="" class="w-full" >
+                                        <option value="Elektronik">Laptop Asus</option>
+                                        <option value="Furniture">Laptop Lenovo</option>
+                                        <option value="Lainnya">Printer HP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="w-1/2">
+                                <label for="nama-supplier" class="form-label">Nama Supplier</label>
+                                <div>
+                                    <select name="nama-supplier" id="" class="w-full" >
+                                        <option value="Elektronik">CV Senja</option>
+                                        <option value="Furniture">PT Black</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex w-full gap-3 mb-3">
+                            <div class="w-1/2">
+                                <label for="tanggal" class="form-label">Nama Barang</label>
+                                <input type="date" class="form-control" name="tanggal" id="tanggal">
+                            </div>
+                            <div class="w-1/2">
+                                <label for="jumlah" class="form-label">Jumlah Masuk</label>
+                                <input type="number" class="form-control" name="jumlah" id="jumlah">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </x-app-layout>
