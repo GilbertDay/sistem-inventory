@@ -35,18 +35,19 @@
                                 <th scope="col">ID Barang</th>
                                 <th scope="col">Nama Barang</th>
                                 <th scope="col">Jenis Barang</th>
-                                <th scope="col">Label Barang</th>
+                                <!-- <th scope="col">Label Barang</th> -->
                                 <th scope="col">Lokasi Barang</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($barangs as $barang)
                             <tr>
-                                <td>BRG-001</td>
-                                <td>Laptop Asus</td>
-                                <td>Elektronik</td>
-                                <td>Laptop 1</td>
-                                <td>Rak 32</td>
+                                <td>{{ $barang->id }}</td>
+                                <td>{{ $barang->nama_barang }}</td>
+                                <td>{{ $barang->jenis_barang->nama }}</td>
+                                <!-- <td>{{ $barang->label_barang }}</td> -->
+                                <td>{{ $barang->lokasi_barang }}</td>
                                 <td>
                                     <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg"><i
                                             class="text-white fa-solid fa-pen-to-square"></i></button>
@@ -54,7 +55,7 @@
                                             class="text-white fa-solid fa-trash-can"></i></button>
                                 </td>
                             </tr>
-
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -73,43 +74,39 @@
             <form action="{{ route('tambahBarang') }}" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
-
-
                     <div class="flex gap-3 mb-3">
                         <div>
                             <label for="nama-barang" class="form-label">Nama Barang</label>
                         <input type="text" class="form-control" name="nama-barang" id="nama-barang" rows="3" />
                         </div>
                         <div>
-                            <label for="stok-barang" class="form-label">Stok Minimum</label>
-                            <input type="text" class="form-control" name="stok-barang" id="stok-barang" rows="3" />
+                            <label for="stok-min" class="form-label">Stok Minimum</label>
+                            <input type="number" class="form-control" name="stok-min" id="stok-min" rows="3" />
                         </div>
-                    </div>
+                    </div >
+
                     <div class="mb-3">
                         <label for="jenis-barang" class="form-label">Jenis Barang</label>
                         <div>
-                            <select name="jenis-barang" id="" class="w-full">
-                                <option value="Elektronik">Elektronik</option>
-                                <option value="Furniture">Furniture</option>
-                                <option value="Lainnya">Lainnya</option>
+                            <select name="jenis_barang" id="jenis_barang" class="w-full">
+                                @foreach($jenis_barangs as $jenis_barang)
+                                    <option value="{{ $jenis_barang->id }}">{{ $jenis_barang->nama }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
 
                     <div class="flex gap-3 mb-3">
-                        <div> <label for="lokasi-barang" class="form-label">Lokasi Barang</label>
-                        <input type="text" class="form-control" name="lokasi-barang" id="lokasi-barang" rows="3" />
+                        <div> <label for="lokasi_barang" class="form-label">Lokasi Barang</label>
+                        <input type="text" class="form-control" name="lokasi_barang" id="lokasi-barang" rows="3" />
                     </div>
                         <div>
-                            <label for="jumlah-barang" class="form-label">Jumlah Barang</label>
-                            <input type="number" class="form-control" name="jumlah-barang" id="jumlah-barang" rows="3" />
+                            <label for="jumlah_barang" class="form-label">Jumlah Barang</label>
+                            <input type="number" class="form-control" name="jumlah_barang" id="jumlah-barang" rows="3" />
                         </div>
                     </div>
-
-
                         <label for="foto" class="form-label">Foto Barang</label>
                         <div class="p-3 bg-slate-100 rounded-2xl">
-
                             <input type="file" class="form-control" name="foto" id="foto" rows="3" />
                         </div>
                 </div>

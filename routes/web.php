@@ -1,13 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DataFeedController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PadukuhanController;
-use App\Http\Controllers\KelompokController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ReparasiBarangController;
 use App\Http\Controllers\Controller;
 
 /*
@@ -24,14 +23,30 @@ use App\Http\Controllers\Controller;
 Route::redirect('/', 'login');
 Route::get('/home', [Controller::class, 'index']);
 
+Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('pages/admin/dashboard');
-})->name('dashboard');
+Route::get('/dataBarang', [BarangController::class, 'index'])->name('dataBarang');
+Route::post('/tambah-barang',[BarangController::class, 'tambahBarang'])->name('tambahBarang');
+Route::post('/edit-barang',[BarangController::class, 'editBarang'])->name('editBarang');
+Route::post('/hapus-barang',[BarangController::class, 'hapusBarang'])->name('hapusBarang');
 
-Route::get('/dataBarang', function () {
-    return view('pages/admin/dataBarang');
-})->name('dataBarang');
+Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::post('/tambah-users', [UserController::class, 'tambahUser'])->name('tambahUser');
+Route::post('/edit-users', [UserController::class, 'editUser'])->name('editUser');
+Route::post('/hapus-users', [UserController::class, 'hapusUser'])->name('hapusUser');
+
+Route::get('/staffPermohonan', [PengajuanController::class, 'index'])->name('staffPermohonan');
+Route::post('/tambah-permohonan', [PengajuanController::class, 'tambahPengajuan'])->name('tambahPermohonan');
+Route::put('/pengajuan/{id}/accept', [PengajuanController::class, 'accept'])->name('pengajuanAccept');
+Route::put('/pengajuan/{id}/reject', [PengajuanController::class, 'reject'])->name('pengajuanReject');
+
+Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
+Route::post('/tambah-supplier', [SupplierController::class, 'tambahSupplier'])->name('tambahSupplier');
+
+Route::get('/reparasiBarang', [ReparasiBarangController::class, 'index'])->name('reparasiBarang');
+Route::post('/tambah-reparasiBarang', [ReparasiBarangController::class, 'tambahReparasiBarang'])->name('tambahReparasiBarang');
+
+Route::get('/permohonan', [PengajuanController::class, 'index'])->name('permohonan');
 
 Route::get('/tambah-barang', function () {
     return view('pages/staff/permohonan');
@@ -65,29 +80,22 @@ Route::get('/laporanBarangKeluar', function () {
     return view('pages/admin/laporanBarangKeluar');
 })->name('laporanBarangKeluar');
 
-Route::get('/users', function () {
-    return view('pages/admin/users');
-})->name('users');
 
-Route::get('/tambah-users', function () {
-    return view('pages/admin/users');
-})->name('tambahUsers');
+
 
 Route::get('/peminjam', function () {
     return view('pages/admin/peminjam');
 })->name('peminjam');
 
-Route::get('/permohonan', function () {
-    return view('pages/admin/permohonan');
-})->name('permohonan');
 
-Route::get('/supplier', function () {
-    return view('pages/admin/supplier');
-})->name('supplier');
 
-Route::get('/reparasiBarang', function () {
-    return view('pages/admin/reparasiBarang');
-})->name('reparasiBarang');
+// Route::get('/supplier', function () {
+//     return view('pages/admin/supplier');
+// })->name('supplier');
+
+// Route::get('/reparasiBarang', function () {
+//     return view('pages/admin/reparasiBarang');
+// })->name('reparasiBarang');
 
 Route::get('/penghapusanBarang', function () {
     return view('pages/admin/penghapusanBarang');
@@ -97,13 +105,8 @@ Route::get('/staffDashboard', function () {
     return view('pages/staff/dashboard');
 })->name('staffDashboard');
 
-Route::get('/staffPermohonan', function () {
-    return view('pages/staff/permohonan');
-})->name('staffPermohonan');
 
-Route::get('/staff/tambah-permohonan', function () {
-    return view('pages/staff/permohonan');
-})->name('tambahPermohonan');
+
 
 
 
