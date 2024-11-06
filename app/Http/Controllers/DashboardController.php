@@ -3,36 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DataFeed;
+use App\Models\Barang;
+use App\Models\Supplier;
 use App\Models\User;
+
 
 class DashboardController extends Controller
 {
-    public function index()
-    {
-        $dataFeed = new DataFeed();
-        $users = User::all();
-
-        return view('pages/admin/users',compact('users'));
-    }
-
-    /**
-     * Displays the analytics screen
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function analytics()
-    {
-        return view('pages/dashboard/analytics');
-    }
-
-    /**
-     * Displays the fintech screen
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function fintech()
-    {
-        return view('pages/dashboard/fintech');
+    public function index(){
+        $dataBarang = Barang::all()->count();
+        $dataUser = User::where('type', 0)->count();
+        $dataSupplier = Supplier::all()->count();
+        $minBarang = Barang::whereColumn('stok', '<', 'min_stok')->get();
+        // dd($minBarang);
+        return view('pages/admin/dashboard',compact('dataBarang','dataUser','dataSupplier','minBarang'));
     }
 }

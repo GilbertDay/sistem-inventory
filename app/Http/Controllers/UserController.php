@@ -1,59 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Models\User;
 
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->paginate(10);
-
-        return view('pages/admin/users',compact('users'));
+        $users = User::orderBy('type', 'desc')->get();
+        // dd($users);
+        return view('pages/admin/users', compact('users'));
     }
 
-    public function tambahUser(Request $req)
-    {
-        // Validate the input data
-        $validatedData = $req->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-            'role' => 'required|in:0,1,2', // Example for role validation, adjust as needed
-        ]);
-
-        // Create a new user instance and save it
+    public function tambahUser(Request $req){
         $user = new User();
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->password = bcrypt($validatedData['password']); // Encrypt the password
-        $user->plain_password = $validatedData['password']; // Encrypt the password
-        $user->type = $validatedData['role'];
+        $user->name = $req->input('name');
+        $user->email = $req->input('email');
+        $user->password = bcrypt($req->input('password'));
+        $user->type = $req->input('type');
         $user->save();
-
-        return redirect('/users')->with('success', 'User added successfully!');
+        return redirect()->back();
     }
 
-    public function editUser(Request $req)
-    {
-        $id = $req->input('id');
+    public function editUser($id){
         $user = User::find($id);
         $user->name = $req->input('name');
         $user->email = $req->input('email');
-        $user->type = $req->input('role');
+        $user->password = bcrypt($req->input('password'));
+        $user->type = $req->input('type');
         $user->save();
-        return redirect('/users')->with('success', 'User updated successfully!');
+        return redirect()->back();
     }
 
-    public function hapusUser(Request $req)
-    {
-        $id = $req->input('id');
+    public function hapusUser($id){
         $user = User::find($id);
         $user->delete();
-        return redirect('/users')->with('success', 'User deleted successfully!');
+        return redirect()->back();
     }
-
 }
+

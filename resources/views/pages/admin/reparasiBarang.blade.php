@@ -40,11 +40,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($reparasiBarangs as $reparasiBarang)
                             <tr>
-                                <td>Laptop Asus</td>
-                                <td>2</td>
-                                <td>26 September 2024</td>
-                                <td>Proses</td>
+                                <td>{{$reparasiBarang->barang->nama_barang}}</td>
+                                <td>{{$reparasiBarang->jumlah_barang}}</td>
+                                <td>{{ Carbon::parse($reparasiBarang->tanggal)->format('d F Y') }}
+                                </td>
+                                <td>{{$reparasiBarang->status == 0 ? 'Menunggu' : 'Selesai'}}</td>
                                 <td>
                                     <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg"><i
                                             class="text-white fa-solid fa-pen-to-square"></i></button>
@@ -52,6 +54,7 @@
                                             class="text-white fa-solid fa-trash-can"></i></button>
                                 </td>
                             </tr>
+                            @endforeach
 
                         </tbody>
                     </table>
@@ -68,48 +71,38 @@
                     <h5 class="modal-title" id="tambahReparasiBarangLabel">Tambah Reparasi Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('tambahBarang') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('tambahReparasiBarang') }}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
 
 
-                        <div class="flex gap-3 mb-3">
+                        <div class="mb-3">
+                            <label for="barang" class="form-label">Barang</label>
                             <div>
-                                <label for="nama-barang" class="form-label">Nama Barang</label>
-                            <input type="text" class="form-control" name="nama-barang" id="nama-barang" rows="3" />
-                            </div>
-                            <div>
-                                <label for="stok-barang" class="form-label">Stok Minimum</label>
-                                <input type="text" class="form-control" name="stok-barang" id="stok-barang" rows="3" />
+                                <select name="barang" id="" class="w-full">
+                                    @foreach($barangs as $barang)
+                                        <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="jenis-barang" class="form-label">Jenis Barang</label>
+                            <label for="jml_reparasi" class="form-label">Stok Minimum</label>
+                            <input type="number" class="form-control" name="jml_reparasi" id="jml_reparasi" rows="3" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="keterangan" class="form-label">Keterangan</label>
                             <div>
-                                <select name="jenis-barang" id="" class="w-full">
-                                    <option value="Elektronik">Elektronik</option>
-                                    <option value="Furniture">Furniture</option>
+                                <select name="keterangan" id="" class="w-full">
+                                    <option value="rusak">Rusak</option>
+                                    <option value="mati_total">Mati Total</option>
                                     <option value="Lainnya">Lainnya</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="flex gap-3 mb-3">
-                            <div> <label for="lokasi-barang" class="form-label">Lokasi Barang</label>
-                            <input type="text" class="form-control" name="lokasi-barang" id="lokasi-barang" rows="3" />
-                        </div>
-                            <div>
-                                <label for="jumlah-barang" class="form-label">Jumlah Barang</label>
-                                <input type="number" class="form-control" name="jumlah-barang" id="jumlah-barang" rows="3" />
-                            </div>
-                        </div>
 
-
-                            <label for="foto" class="form-label">Foto Barang</label>
-                            <div class="p-3 bg-slate-100 rounded-2xl">
-
-                                <input type="file" class="form-control" name="foto" id="foto" rows="3" />
-                            </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

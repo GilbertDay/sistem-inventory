@@ -12,7 +12,7 @@
                     <img src="{{asset('images/dashboard-admin/data-barang.png') }}" alt="" width="60">
                     <div>
                         <div>Data Barang</div>
-                        <div class="text-2xl">0</div>
+                        <div class="text-2xl">{{$dataBarang}}</div>
                     </div>
                 </div>
                 <div class="flex gap-3">
@@ -37,14 +37,14 @@
                     <img src="{{asset('images/dashboard-admin/data-supplier.png') }}" alt="" width="60">
                     <div>
                         <div>Data Supplier</div>
-                        <div class="text-2xl">0</div>
+                        <div class="text-2xl">{{$dataSupplier}}</div>
                     </div>
                 </div>
                 <div class="flex gap-3">
                     <img src="{{asset('images/dashboard-admin/data-user.png') }}" alt="" width="60">
                     <div>
                         <div>Data User</div>
-                        <div class="text-2xl">0</div>
+                        <div class="text-2xl">{{$dataUser}}</div>
                     </div>
                 </div>
             </div>
@@ -65,27 +65,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($minBarang as $brg)
                     <tr>
-                        <td>1</td>
-                        <td>BRG-001</td>
-                        <td>Laptop Asus</td>
-                        <td>Elektronik</td>
-                        <td>2</td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$brg->id}}</td>
+                        <td>{{$brg->nama_barang}}</td>
+                        <td>{{$brg->jenis_barang->nama}}</td>
+                        <td>{{$brg->stok}}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>BRG-001</td>
-                        <td>Laptop Asus</td>
-                        <td>Elektronik</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>BRG-001</td>
-                        <td>Laptop Asus</td>
-                        <td>Elektronik</td>
-                        <td>2</td>
-                    </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>

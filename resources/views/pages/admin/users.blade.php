@@ -31,7 +31,21 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach($users as $user)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{Carbon::parse($user->updated_at)->diffForHumans()}}</td>
+                            <td>{{$user->role == 0 ? 'Staff' : ($user->role == 1 ? 'Kepala Dept IT' : 'Admin')}}</td>
+                            <td>
+                                <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg"><i
+                                        class="text-white fa-solid fa-pen-to-square"></i></button>
+                                <button type="submit" class="px-2.5 py-2 text-black bg-red-600 rounded-lg"><i
+                                        class="text-white fa-solid fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -48,7 +62,7 @@
                     <h5 class="modal-title" id="tambahUsersLabel">Tambah Users</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('tambahUsers') }}" method="POST">
+                <form action="{{ route('tambahUser') }}" method="POST">
                     <div class="modal-body">
                         @csrf
 
@@ -69,10 +83,10 @@
 
                         <div class="mb-3">
                             <label for="role" class="form-label">Jenis User</label>
-                            <select class="form-select" id="role" name="role">
-                                <option value="0">User</option>
-                                <option value="1">Dosen</option>
-                                <option value="2">Admin</option>
+                            <select class="form-select" id="role" name="type">
+                                <option value="2">Staff</option>
+                                <option value="0">Kepala Dept IT</option>
+                                <option value="1">Admin</option>
                             </select>
                         </div>
                     </div>

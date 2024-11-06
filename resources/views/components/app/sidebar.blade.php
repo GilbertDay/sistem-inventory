@@ -148,20 +148,20 @@
                     <h3 class="pl-3 my-2 text-xs font-semibold text-gray-400 uppercase dark:text-gray-500">
                         <span class="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
                             aria-hidden="true">•••</span>
-                        <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Barang</span>
+                        <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Laporan</span>
                     </h3>
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['laporanStok'])){{ 'bg-[#283593]' }}@endif"
-                        x-data="{ open: {{ in_array(Request::segment(1), ['laporanStok']) ? 1 : 0 }} }">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['laporanStok'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['stokOpname'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['stokOpname']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['stokOpname'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
                             @click.prevent="open = !open; sidebarExpanded = true">
-                            <a href="{{ route('laporanStok') }}">
+                            <a href="{{ route('stokOpname') }}">
 
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center">
                                         <i
-                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['laporanStok'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                            class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['stokOpname'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
                                         <span
-                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['laporanStok'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Laporan
+                                            class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['stokOpname'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif  lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
                                             Stok Opname</span>
                                     </div>
 

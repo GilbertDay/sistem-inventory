@@ -28,7 +28,6 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
-        'exist_group',
     ];
 
     /**
@@ -61,10 +60,29 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    protected function type(): Attribute
+
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+
+    protected static function boot()
     {
-        return new Attribute(
-            get: fn ($value) => ['user', 'admin', 'manager'][$value],
-        );
+        parent::boot();
+
+        static::creating(function ($model) {
+            // Mengambil semua record dan mengurutkan berdasarkan bagian numerik dari id
+            $lastRecord = static::all()->sortByDesc(function($item) {
+                return (int) str_replace('USER-', '', $item->id);
+            })->first();
+
+            // Jika ada data, ambil bagian angka dari ID terakhir, tambahkan 1 dan buat ID baru
+            if ($lastRecord) {
+                $lastId = (int) str_replace('USER-', '', $lastRecord->id);
+                $model->id = 'USER-' . ($lastId + 1);
+            } else {
+                // Jika tidak ada data, mulai dari 1
+                $model->id = 'USER-1';
+            }
+        });
     }
 }
