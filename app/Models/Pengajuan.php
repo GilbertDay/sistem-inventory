@@ -33,6 +33,9 @@ class Pengajuan extends Model
         });
     }
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public function jenis_barang() {
         return $this->belongsTo(JenisBarang::class, 'jenis_barang_id');
     }

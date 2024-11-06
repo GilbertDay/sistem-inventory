@@ -19,14 +19,14 @@
                     <img src="{{asset('images/dashboard-admin/barang-masuk.png') }}" alt="" width="50">
                     <div>
                         <div>Barang Masuk</div>
-                        <div class="text-2xl">0</div>
+                        <div class="text-2xl">{{$barangMasuk}}</div>
                     </div>
                 </div>
                 <div class="flex gap-3">
                     <img src="{{asset('images/dashboard-admin/barang-keluar.png') }}" alt="" width="50">
                     <div>
                         <div>Barang Keluar</div>
-                        <div class="text-2xl">0</div>
+                        <div class="text-2xl">{{$barangKeluar}}</div>
                     </div>
                 </div>
 

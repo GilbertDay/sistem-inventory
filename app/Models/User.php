@@ -24,6 +24,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -61,28 +62,4 @@ class User extends Authenticatable
     ];
 
 
-    protected $keyType = 'string';
-    public $incrementing = false;
-
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            // Mengambil semua record dan mengurutkan berdasarkan bagian numerik dari id
-            $lastRecord = static::all()->sortByDesc(function($item) {
-                return (int) str_replace('USER-', '', $item->id);
-            })->first();
-
-            // Jika ada data, ambil bagian angka dari ID terakhir, tambahkan 1 dan buat ID baru
-            if ($lastRecord) {
-                $lastId = (int) str_replace('USER-', '', $lastRecord->id);
-                $model->id = 'USER-' . ($lastId + 1);
-            } else {
-                // Jika tidak ada data, mulai dari 1
-                $model->id = 'USER-1';
-            }
-        });
-    }
 }

@@ -14,12 +14,20 @@ class Controller extends BaseController
 
     public function index()
     {
-        if (Auth::user()->type == 1) {
+        // dd(Auth::user());
+
+        $user = Auth::user();
+        if ($user == null) {
+            return redirect('/login'); // Redirect to login if user is not authenticated
+        }
+
+
+        if ($user->type == 1) {
             return redirect('/dashboard');
-        } else if (Auth::user()->type == 0) {
-            return redirect('/laporanStok');
-        }else if (Auth::user()->type == 2) {
-            return redirect('/dashboard');
+        } else if ($user->type == 0) {
+            return redirect('/stokOpname');
+        } else if ($user->type == 2) {
+            return redirect('/staffDashboard');
         }
     }
 }
