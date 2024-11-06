@@ -30,6 +30,16 @@ Route::post('/tambah-barang',[BarangController::class, 'tambahBarang'])->name('t
 Route::post('/edit-barang',[BarangController::class, 'editBarang'])->name('editBarang');
 Route::post('/hapus-barang',[BarangController::class, 'hapusBarang'])->name('hapusBarang');
 
+Route::get('/barangMasuk', [BarangController::class, 'barangMasuk'])->name('barangMasuk');
+Route::post('/tambah-barang-masuk',[BarangController::class, 'tambahBarangMasuk'])->name('tambahBarangMasuk');
+Route::post('/edit-barang-masuk',[BarangController::class, 'editBarangMasuk'])->name('editBarangMasuk');
+Route::post('/hapus-barang-masuk',[BarangController::class, 'hapusBarangMasuk'])->name('hapusBarangMasuk');
+
+Route::get('/barangKeluar', [BarangController::class, 'barangKeluar'])->name('barangKeluar');
+Route::post('/tambah-barang-keluar',[BarangController::class, 'tambahBarangKeluar'])->name('tambahBarangKeluar');
+Route::post('/edit-barang-keluar',[BarangController::class, 'editBarangKeluar'])->name('editBarangKeluar');
+Route::post('/hapus-barang-keluar',[BarangController::class, 'hapusBarangKeluar'])->name('hapusBarangKeluar');
+
 Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::post('/tambah-users', [UserController::class, 'tambahUser'])->name('tambahUser');
 Route::post('/edit-users', [UserController::class, 'editUser'])->name('editUser');
@@ -60,17 +70,11 @@ Route::get('/tambah-jenis-barang', function () {
     return view('pages/staff/permohonan');
 })->name('tambahJenisBarang');
 
-Route::get('/barangMasuk', function () {
-    return view('pages/admin/barangMasuk');
-})->name('barangMasuk');
 
-Route::get('/barangKeluar', function () {
-    return view('pages/admin/barangKeluar');
-})->name('barangKeluar');
 
-Route::get('/laporanStok', function () {
-    return view('pages/admin/laporanStok');
-})->name('laporanStok');
+Route::get('/stokOpname', function () {
+    return view('pages/admin/stokOpname');
+})->name('stokOpname');
 
 Route::get('/laporanBarangMasuk', function () {
     return view('pages/admin/laporanBarangMasuk');

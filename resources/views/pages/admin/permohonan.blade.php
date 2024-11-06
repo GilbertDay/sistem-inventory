@@ -46,7 +46,7 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$pengajuan->id}}</td>
-                                <td>{{Carbon::parse($pengajuan->created_at)}}</td>
+                                <td>{{Carbon::parse($pengajuan->created_at)->format('d F Y')}}</td>
                                 <td>{{$pengajuan->nama_barang}}</td>
                                 <td>{{$pengajuan->jumlah_barang}}</td>
                                 <td>{{$pengajuan->jenis_barang->nama}}</td>
