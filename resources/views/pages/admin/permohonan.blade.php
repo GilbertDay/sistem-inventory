@@ -38,6 +38,7 @@
                                 <th scope="col">Nama Barang</th>
                                 <th scope="col">Jumlah Barang</th>
                                 <th scope="col">Jenis Barang</th>
+                                <th scope="col">Nama Pemohon</th>
                                 <th scope="col">Keterangan</th>
                             </tr>
                         </thead>
@@ -50,6 +51,7 @@
                                 <td>{{$pengajuan->nama_barang}}</td>
                                 <td>{{$pengajuan->jumlah_barang}}</td>
                                 <td>{{$pengajuan->jenis_barang->nama}}</td>
+                                <td>{{$pengajuan->user->name}}</td>
                                 @if(Auth::user()->type == '1' || Auth::user()->type == '2')
                                     <td>
                                     {{$pengajuan->keterangan == 0 ? 'Menunggu' : ($pengajuan->keterangan == 1 ? 'Diterima' : 'Ditolak')}}
