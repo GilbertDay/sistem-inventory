@@ -29,6 +29,7 @@ Route::get('/dataBarang', [BarangController::class, 'index'])->name('dataBarang'
 Route::post('/tambah-barang',[BarangController::class, 'tambahBarang'])->name('tambahBarang');
 Route::post('/edit-barang',[BarangController::class, 'editBarang'])->name('editBarang');
 Route::post('/hapus-barang',[BarangController::class, 'hapusBarang'])->name('hapusBarang');
+Route::post('/detail-barang/{id}', [BarangController::class, 'detailBarang'])->name('detailBarang');
 
 Route::get('/barangMasuk', [BarangController::class, 'barangMasuk'])->name('barangMasuk');
 Route::post('/tambah-barang-masuk',[BarangController::class, 'tambahBarangMasuk'])->name('tambahBarangMasuk');

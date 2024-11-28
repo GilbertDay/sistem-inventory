@@ -30,6 +30,8 @@
                                 <th scope="col">ID Transaksi</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Nama Barang</th>
+                                <th scope="col">Spesifikasi Barang</th>
+                                <th scope="col">Label Barang</th>
                                 <th scope="col">Jumlah Masuk</th>
                                 <th scope="col">Nama Supplier</th>
                                 <th scope="col">Aksi</th>
@@ -42,6 +44,8 @@
                                 <td>{{$brg->id}}</td>
                                 <td>{{Carbon::parse($brg->tanggal)->format('d F Y')}}</td>
                                 <td>{{$brg->barang->nama_barang}}</td>
+                                <td>{{$brg->barang->spesifikasi_barang}}</td>
+                                <td>{{$brg->barang->label_barang}}</td>
                                 <td>{{$brg->jumlah}}</td>
                                 <td>{{$brg->supplier->nama}}</td>
                                 <td class="flex justify-center gap-2">
