@@ -21,9 +21,10 @@ class PengajuanController extends Controller
     public function tambahPengajuan(Request $req){
         $pengajuan = new Pengajuan();
         $pengajuan->user_id = Auth::user()->id;
-        $pengajuan->jenis_barang_id = $req->input('jenis_barang');
         $pengajuan->nama_barang = $req->input('nama_barang');
         $pengajuan->jumlah_barang = $req->input('jumlah_barang');
+        $pengajuan->alasan = $req->input('alasan');
+        $pengajuan->spesifikasi_barang = $req->input('spesifikasi_barang');
         $pengajuan->tgl_pengajuan = Carbon::now();
         $pengajuan->save();
         return redirect()->back();

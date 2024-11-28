@@ -32,14 +32,14 @@
                     <table class="table border-black table-bordered ">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">ID Pengajuan</th>
-                                <th scope="col">Tanggal Pengajuan</th>
-                                <th scope="col">Nama Barang</th>
-                                <th scope="col">Jumlah Barang</th>
-                                <th scope="col">Jenis Barang</th>
-                                <th scope="col">Nama Pemohon</th>
-                                <th scope="col">Keterangan</th>
+                                <th scope="col" class="text-center align-middle">No</th>
+                                <th scope="col" class="text-center align-middle">ID Pengajuan</th>
+                                <th scope="col" class="text-center align-middle">Tanggal Pengajuan</th>
+                                <th scope="col" class="text-center align-middle">Nama Barang</th>
+                                <th scope="col" class="text-center align-middle">Jumlah Barang</th>
+                                <th scope="col" class="text-center align-middle">Spesifikasi Barang</th>
+                                <th scope="col" class="text-center align-middle">Nama Pemohon</th>
+                                <th scope="col" class="text-center align-middle">Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +50,7 @@
                                 <td>{{Carbon::parse($pengajuan->created_at)->format('d F Y')}}</td>
                                 <td>{{$pengajuan->nama_barang}}</td>
                                 <td>{{$pengajuan->jumlah_barang}}</td>
-                                <td>{{$pengajuan->jenis_barang->nama}}</td>
+                                <td>{{$pengajuan->spesifikasi_barang}}</td>
                                 <td>{{$pengajuan->user->name}}</td>
                                 @if(Auth::user()->type == '1' || Auth::user()->type == '2')
                                     <td>
@@ -115,16 +115,29 @@
                     </div>
 
                     <div class="flex gap-3 mb-3">
-                        <div> <label for="nama_pemohon" class="form-label">Nama Pemohon</label>
+                        <div>
+                            <label for="nama_pemohon" class="form-label">Nama Pemohon</label>
                         <input type="text" class="form-control" value="{{ Auth::user()->name }}" name="nama_pemohon" id="nama_pemohon" rows="3" readonly />
-                    </div>
+                        </div>
+
                         <div>
                             <label for="jumlah_barang" class="form-label">Jumlah Barang</label>
                             <input type="number" class="form-control" name="jumlah_barang" id="jumlah_barang" rows="3" />
                         </div>
+
                     </div>
 
-                </div>
+                    <div>
+                        <label for="spesifikasi_barang" class="form-label">Spesifikasi Barang</label>
+                        <input type="text" class="form-control"  name="spesifikasi_barang" id="spesifikasi_barang" rows="3" />
+                    </div>
+
+                    <div>
+                        <label for="alasan" class="form-label">Alasan Pengajuan</label>
+                        <textarea class="form-control" name="alasan" id="alasan" rows="3"></textarea>
+                    </div>
+
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>

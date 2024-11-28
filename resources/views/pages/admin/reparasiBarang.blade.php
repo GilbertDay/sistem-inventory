@@ -93,13 +93,8 @@
 
                         <div class="mb-3">
                             <label for="keterangan" class="form-label">Keterangan</label>
-                            <div>
-                                <select name="keterangan" id="" class="w-full">
-                                    <option value="rusak">Rusak</option>
-                                    <option value="mati_total">Mati Total</option>
-                                    <option value="Lainnya">Lainnya</option>
-                                </select>
-                            </div>
+                            <input type="text" class="form-control" name="keterangan" id="keterangan" rows="3" />
+
                         </div>
 
 

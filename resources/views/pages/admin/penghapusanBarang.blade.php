@@ -99,9 +99,8 @@
                             <label for="ket-hapus" class="form-label">Keterangan</label>
                             <div>
                                 <select name="ket-hapus" id="" class="w-full">
-                                    <option value="Elektronik">Ganti Baru</option>
-                                    <option value="Furniture">Furniture</option>
-                                    <option value="Lainnya">Lainnya</option>
+                                    <option value="Elektronik">Rusak Total</option>
+                                    <option value="Furniture">Dihibahkan</option>
                                 </select>
                             </div>
                         </div>

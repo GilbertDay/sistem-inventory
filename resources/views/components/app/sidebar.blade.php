@@ -406,6 +406,27 @@
                                 </a>
                             </a>
                         </li>
+                        <div class="border-[1px] border-[#283593] mx-3 my-3"></div>
+
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(1), ['reparasiBarang'])){{ 'bg-[#283593]' }}@endif"
+                        x-data="{ open: {{ in_array(Request::segment(1), ['reparasiBarang']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['reparasiBarang'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            @click.prevent="open = !open; sidebarExpanded = true">
+                                <a href="{{ route('reparasiBarang') }}">
+
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <i
+                                                class="fa-solid fa-users shrink-0 fill-current @if(in_array(Request::segment(1), ['reparasiBarang'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif"></i>
+                                            <span
+                                                class="ml-4 text-sm font-medium duration-200 @if(in_array(Request::segment(1), ['reparasiBarang'])){{ 'text-white' }}@else{{ 'text-gray-600 dark:text-gray-500' }}@endif lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Reparasi Barang</span>
+                                        </div>
+
+                                    </div>
+                            </a>
+                            </a>
+                        </li>
+
                     @endif
 
                 </ul>

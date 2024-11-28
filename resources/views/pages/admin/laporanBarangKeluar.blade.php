@@ -35,11 +35,8 @@
                             <button type="button" class="btn flex gap-2 lg:ml-6 bg-[#283593] h-fit  text-white">
                                 Tampilkan
                             </button>
-                            <button type="button" class="btn flex gap-2 bg-[#F57C00] h-fit  text-white">
-                                Cetak
-                            </button>
                             <button type="button" class="btn flex gap-2 bg-[#43A047] h-fit  text-white">
-                                Export
+                                Download
                             </button>
                         </div>
                         <div></div>
