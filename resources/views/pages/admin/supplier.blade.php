@@ -25,7 +25,7 @@
                 <i class="fa-solid fa-house"></i>
             </a>
             <div class="flex items-center gap-3 text-lg"><i class="fa-solid fa-chevron-right"></i>Pengajuan<i
-                    class="fa-solid fa-chevron-right"></i>Permohonan</div>
+                    class="fa-solid fa-chevron-right"></i>Supplier</div>
         </div>
 
         <div class="flex justify-end">

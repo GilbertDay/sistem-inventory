@@ -1,12 +1,8 @@
 @if ($errors->any())
     <div {{ $attributes }}>
-        <div class="px-4 py-2 rounded-lg text-sm bg-red-500 text-white">
-            <div class="font-medium">{{ __('Whoops! Something went wrong.') }}</div>
-            <ul class="mt-1 list-disc list-inside text-sm">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>         
+        <div class="px-4 py-2 text-sm text-white bg-red-500 rounded-lg max-w-1/2">
+            <div class="font-medium">{{ __('Email atau Password Salah !!') }}</div>
+
+        </div>
     </div>
 @endif
