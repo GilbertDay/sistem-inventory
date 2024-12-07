@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $barangMasuk = BarangMasuk::all()->count();
         $barangKeluar = BarangKeluar::all()->count();
         $dataSupplier = Supplier::all()->count();
-        // dd($minBarang);
-        return view('pages/admin/dashboard',compact('dataBarang','dataUser','dataSupplier','barangMasuk','barangKeluar'));
+        $minBarang = Barang::whereColumn('stok', '<', 'min_stok')->get();
+        return view('pages/admin/dashboard',compact('dataBarang','dataUser','dataSupplier','barangMasuk','barangKeluar', 'minBarang'));
     }
 }

@@ -50,7 +50,31 @@
             </div>
         </div>
 
-        <div class="px-4">
+        <div class="text-white flex gap-2 py-2 px-3 bg-[#283593] items-center w-fit rounded-xl">
+            <i class="fa-solid fa-circle-info"></i>
+            <div class="text-sm">Stok barang telah mencapai batas minimum</div>
+        </div>
+        <div class="">
+            <table class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama Barang</th>
+                        <th scope="col">Jenis Barang</th>
+                        <th scope="col">Stok</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($minBarang as $mb)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$mb->nama_barang}}</td>
+                        <td>{{$mb->jenis_barang->nama}}</td>
+                        <td>{{$mb->stok}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 

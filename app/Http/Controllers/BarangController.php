@@ -14,7 +14,7 @@ class BarangController extends Controller
 {
     public function index()
     {
-        $barangs = Barang::all();
+        $barangs = Barang::where('status', 'active')->get();
         $jenis_barangs = JenisBarang::all();
 
         return view('pages/admin/dataBarang', compact('barangs', 'jenis_barangs'));
@@ -34,7 +34,7 @@ class BarangController extends Controller
     }
 
     public function barangMasuk(){
-        $barangs = Barang::all();
+        $barangs = Barang::where('status', 'active')->get();
         $suppliers = Supplier::all();
         $barangMasuk = BarangMasuk::all();
         return view('pages/admin/barangMasuk', compact('barangs','suppliers','barangMasuk'));
@@ -51,7 +51,7 @@ class BarangController extends Controller
     }
 
     public function barangKeluar(){
-        $barangs = Barang::all();
+        $barangs = Barang::where('status', 'active')->get();
         $barangKeluar = BarangKeluar::all();
         return view('pages/admin/barangKeluar', compact('barangs','barangKeluar'));
     }

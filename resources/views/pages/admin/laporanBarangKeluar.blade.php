@@ -31,15 +31,12 @@
                             <div>Tanggal Akhir</div>
                             <input class="rounded-lg shadow-lg" type="text" id="to" name="to">
                         </div>
-                        <div class="flex gap-2.5">
+
                             <button type="button" class="btn flex gap-2 lg:ml-6 bg-[#283593] h-fit  text-white">
-                                Tampilkan
+                                Print
                             </button>
-                            <button type="button" class="btn flex gap-2 bg-[#43A047] h-fit  text-white">
-                                Download
-                            </button>
-                        </div>
-                        <div></div>
+
+
                     </div>
                 </div>
             </div>

@@ -7,6 +7,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ReparasiBarangController;
+use App\Http\Controllers\PenghapusanBarangController;
+use App\Http\Controllers\StokOpnameController;
+use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\Controller;
 
 /*
@@ -59,6 +62,22 @@ Route::post('/tambah-reparasiBarang', [ReparasiBarangController::class, 'tambahR
 
 Route::get('/permohonan', [PengajuanController::class, 'index'])->name('permohonan');
 
+Route::get('/penghapusanBarang', [PenghapusanBarangController::class, 'index'])->name('penghapusanBarang');
+Route::post('/tambah-penghapusan-barang',[PenghapusanBarangController::class, 'add'])->name('tambahPenghapusanBarang');
+
+Route::get('/staffDashboard', [UserController::class, 'dashboard'])->name('staffDashboard');
+
+Route::get('/stokOpname', [StokOpnameController::class, 'index'])->name('stokOpname');
+Route::post('/sesuaikan-stokOpname', [StokOpnameController::class, 'change'])->name('sesuaikanStokOpname');
+Route::post('/tambah-stokOpname', [StokOpnameController::class, 'add'])->name('tambahStokOpname');
+Route::post('/edit-stokOpname', [StokOpnameController::class, 'edit'])->name('editStokOpaname');
+Route::post('/hapus-stokOpname', [StokOpnameController::class, 'delete'])->name('hapusStokOpname');
+
+Route::get('/laporanBarangMasuk', [BarangMasukController::class, 'filter'])->name('laporanBarangMasuk');
+
+Route::post('/hapus-stokOpname', [StokOpnameController::class, 'delete'])->name('hapusStokOpname');
+
+
 Route::get('/tambah-barang', function () {
     return view('pages/staff/permohonan');
 })->name('tambahBarang');
@@ -73,18 +92,15 @@ Route::get('/tambah-jenis-barang', function () {
 
 
 
-Route::get('/stokOpname', function () {
-    return view('pages/admin/stokOpname');
-})->name('stokOpname');
 
-Route::get('/laporanBarangMasuk', function () {
-    return view('pages/admin/laporanBarangMasuk');
-})->name('laporanBarangMasuk');
+
+// Route::get('/laporanBarangMasuk', function () {
+//     return view('pages/admin/laporanBarangMasuk');
+// })->name('laporanBarangMasuk');
 
 Route::get('/laporanBarangKeluar', function () {
     return view('pages/admin/laporanBarangKeluar');
 })->name('laporanBarangKeluar');
-
 
 
 
@@ -94,21 +110,6 @@ Route::get('/peminjam', function () {
 
 
 
-// Route::get('/supplier', function () {
-//     return view('pages/admin/supplier');
-// })->name('supplier');
-
-// Route::get('/reparasiBarang', function () {
-//     return view('pages/admin/reparasiBarang');
-// })->name('reparasiBarang');
-
-Route::get('/penghapusanBarang', function () {
-    return view('pages/admin/penghapusanBarang');
-})->name('penghapusanBarang');
-
-Route::get('/staffDashboard', function () {
-    return view('pages/staff/dashboard');
-})->name('staffDashboard');
 
 
 

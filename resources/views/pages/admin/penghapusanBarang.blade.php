@@ -27,12 +27,11 @@
         </div>
         <div class="">
             <div class="card bg-[#90CAF9]" id="laporan-masuk">
-                <div class="text-xl text-white bg-[#283593] card-header">Data Barang</div>
+                <div class="text-xl text-white bg-[#283593] card-header">Data Barang Penghapusan</div>
                 <div class="card-body">
                     <table class="table border-black table-bordered ">
                         <thead>
                             <tr>
-                                <th scope="col">ID Barang</th>
                                 <th scope="col">Nama Barang</th>
                                 <th scope="col">Jenis Barang</th>
                                 <th scope="col">Label Barang</th>
@@ -41,8 +40,8 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($penghapusanBarangs as $penghapusanBarang)
                             <tr>
-                                <td>BRG-001</td>
                                 <td>Laptop Asus</td>
                                 <td>Elektronik</td>
                                 <td>Laptop 1</td>
@@ -54,7 +53,7 @@
                                             class="text-white fa-solid fa-trash-can"></i></button>
                                 </td>
                             </tr>
-
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -70,37 +69,29 @@
                     <h5 class="modal-title" id="tambahPenghapusanBarangLabel">Tambah Penghapusan Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('tambahBarang') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('tambahPenghapusanBarang') }}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
-                        <div class="flex gap-3 mb-3">
-                            <div>
+                            <div class="flex flex-col mb-3" >
                                 <label for="nama-barang" class="form-label">Nama Barang</label>
-                                <input type="text" class="form-control" name="nama-barang" id="nama-barang" rows="3" />
-                            </div>
-                            <div>
-                                <label for="lokasi-barang" class="form-label">Lokasi Barang</label>
-                                <input type="text" class="form-control" name="lokasi-barang" id="lokasi-barang" rows="3" />
-                            </div>
-                        </div>
+                                @if(isset($barangs) && $barangs->count() > 0)
+                                    <select name="barang_id" class="w-full">
+                                        @foreach($barangs as $barang)
+                                            <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <input type="text" value="Tidak ada barang" readonly/>
+                                @endif
 
-                        <div class="flex w-full gap-3 mb-3">
-                            <div class="w-1/2">
-                                <label for="tanggal-hapus" class="form-label">Tanggal</label>
-                                <input type="date" class="form-control" name="tanggal-hapus" id="tanggal-hapus" rows="3" />
                             </div>
-                            <div class="w-1/2">
-                                <label for="jumlah-barang" class="form-label">Jumlah Barang</label>
-                                <input type="number" class="form-control" name="jumlah-barang" id="jumlah-barang" rows="3" />
-                            </div>
-                        </div>
 
                         <div class="mb-3">
                             <label for="ket-hapus" class="form-label">Keterangan</label>
                             <div>
-                                <select name="ket-hapus" id="" class="w-full">
-                                    <option value="Elektronik">Rusak Total</option>
-                                    <option value="Furniture">Dihibahkan</option>
+                                <select name="keterangan" id="" class="w-full">
+                                    <option value="Rusak Total">Rusak Total</option>
+                                    <option value="Dihibahkan">Dihibahkan</option>
                                 </select>
                             </div>
                         </div>

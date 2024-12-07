@@ -12,21 +12,21 @@
                     <img src="{{asset('images/dashboard-admin/data-barang.png') }}" alt="" width="60">
                     <div>
                         <div>Data Barang</div>
-                        <div class="text-2xl">0</div>
+                        <div class="text-2xl">{{$dataBarang}}</div>
                     </div>
                 </div>
                 <div class="flex gap-3">
                     <img src="{{asset('images/dashboard-admin/barang-masuk.png') }}" alt="" width="50">
                     <div>
                         <div>Barang Masuk</div>
-                        <div class="text-2xl">0</div>
+                        <div class="text-2xl">{{$barangMasuk}}</div>
                     </div>
                 </div>
                 <div class="flex gap-3">
                     <img src="{{asset('images/dashboard-admin/barang-keluar.png') }}" alt="" width="50">
                     <div>
                         <div>Barang Keluar</div>
-                        <div class="text-2xl">0</div>
+                        <div class="text-2xl">{{$barangKeluar}}</div>
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
             <i class="fa-solid fa-circle-info"></i>
             <div class="text-sm">Stok barang telah mencapai batas minimum</div>
         </div>
-        <div class="px-4">
+        <div class="">
             <table class="table table-bordered ">
                 <thead>
                     <tr>
@@ -48,33 +48,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($minBarang as $mb)
                     <tr>
-                        <td>1</td>
-                        <td>BRG-001</td>
-                        <td>Laptop Asus</td>
-                        <td>Elektronik</td>
-                        <td>2</td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$mb->nama_barang}}</td>
+                        <td>{{$mb->jenis_barang->nama}}</td>
+                        <td>{{$mb->stok}}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>BRG-001</td>
-                        <td>Laptop Asus</td>
-                        <td>Elektronik</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>BRG-001</td>
-                        <td>Laptop Asus</td>
-                        <td>Elektronik</td>
-                        <td>2</td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 
-    </div>
+
 
 
 </x-app-layout>

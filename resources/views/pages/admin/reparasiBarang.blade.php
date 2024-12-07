@@ -5,7 +5,7 @@
                 <i class="fa-solid fa-house"></i>
             </a>
             <div class="flex items-center gap-3 text-lg"><i class="fa-solid fa-chevron-right"></i>Barang<i
-                    class="fa-solid fa-chevron-right"></i>Data Barang</div>
+                    class="fa-solid fa-chevron-right"></i>Reparasi Barang</div>
         </div>
         @if(Auth::user()->type == 1)
             <div class="flex justify-end">
@@ -16,7 +16,7 @@
                 </button>
             </div>
         @endif
-        <div class="flex items-center justify-end w-full gap-3">
+        <!-- <div class="flex items-center justify-end w-full gap-3">
             <div class="flex gap-2">
                 <img src="{{asset('images/search.png') }}" alt="">
                 Cari
@@ -24,35 +24,43 @@
             <div>
                 <input type="text" class="w-52" id="searchBarang">
             </div>
-        </div>
-        <div class="">
-            <div class="card bg-[#90CAF9]" id="laporan-masuk">
-                <div class="text-xl text-white bg-[#283593] card-header">Data Reparasi Barang</div>
-                <div class="card-body">
-                    <table class="table border-black table-bordered ">
+        </div> -->
+        <div class="p-4 bg-[#90caf971] rounded-2xl  ">
+            <div class="" id="laporan-masuk">
+                <div class="text-xl text-white bg-[#283593] card-header mb-4">Data Reparasi Barang</div>
+                <div class="">
+                    <table class="table bg-transparent border-black table-bordered ">
                         <thead>
                             <tr>
                                 <th scope="col">Nama Barang</th>
-                                <th scope="col">Jumlah Barang</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Status</th>
+                                <!-- <th scope="col">Jumlah Barang</th> -->
+                                <th scope="col">Spesifikasi Barang</th>
+                                <th scope="col">Tanggal Reparasi</th>
+                                <th scope="col">Tanggal Selesai</th>
+                                <th scope="col">Status Reparasi</th>
+                                @if(Auth::user()->type == 1)
                                 <th scope="col">Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($reparasiBarangs as $reparasiBarang)
                             <tr>
                                 <td>{{$reparasiBarang->barang->nama_barang}}</td>
-                                <td>{{$reparasiBarang->jumlah_barang}}</td>
-                                <td>{{ Carbon::parse($reparasiBarang->tanggal)->format('d F Y') }}
+                                <!-- <td>{{$reparasiBarang->jumlah_barang}}</td> -->
+                                <td>{{$reparasiBarang->barang->spesifikasi_barang}}</td>
+                                <td>{{ Carbon::parse($reparasiBarang->tanggal_reparasi)->format('d F Y') }}
+                                    <td>{{ $reparasiBarang->tanggal_selesai ? Carbon::parse($reparasiBarang->tanggal_selesai)->format('d F Y') : '-' }}
                                 </td>
                                 <td>{{$reparasiBarang->status == 0 ? 'Menunggu' : 'Selesai'}}</td>
+                                @if(Auth::user()->type == 1)
                                 <td>
                                     <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg"><i
                                             class="text-white fa-solid fa-pen-to-square"></i></button>
                                     <button type="submit" class="px-2.5 py-2 text-black bg-red-600 rounded-lg"><i
                                             class="text-white fa-solid fa-trash-can"></i></button>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
 
@@ -86,10 +94,11 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-3">
+
+                        <!-- <div class="mb-3">
                             <label for="jml_reparasi" class="form-label">Stok Minimum</label>
                             <input type="number" class="form-control" name="jml_reparasi" id="jml_reparasi" rows="3" />
-                        </div>
+                        </div> -->
 
                         <div class="mb-3">
                             <label for="keterangan" class="form-label">Keterangan</label>

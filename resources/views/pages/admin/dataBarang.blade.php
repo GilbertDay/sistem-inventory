@@ -59,7 +59,6 @@
                                     data-bs-target="#detailBarang-{{ $barang->id }}">
                                         <i class="text-white fa-solid fa-eye"></i>
                                     </button>
-
                                 </td>
                             </tr>
                             @endforeach
@@ -69,8 +68,8 @@
             </div>
         </div>
         @foreach($barangs as $barang)
-        <div class="modal fade" id="detailBarang-{{ $barang->id }}" tabindex="-1" aria-labelledby="detailBarangLabel">
-            <div class="modal-dialog modal-dialog-centered">
+        <div class="modal fade" clas id="detailBarang-{{ $barang->id }}" tabindex="-1" aria-labelledby="detailBarangLabel">
+            <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="detailBarangLabel">Detail Barang</h5>
