@@ -10,6 +10,8 @@ use App\Http\Controllers\ReparasiBarangController;
 use App\Http\Controllers\PenghapusanBarangController;
 use App\Http\Controllers\StokOpnameController;
 use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\BarangKeluarController;
+use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\Controller;
 
 /*
@@ -30,9 +32,17 @@ Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard'
 
 Route::get('/dataBarang', [BarangController::class, 'index'])->name('dataBarang');
 Route::post('/tambah-barang',[BarangController::class, 'tambahBarang'])->name('tambahBarang');
-Route::post('/edit-barang',[BarangController::class, 'editBarang'])->name('editBarang');
+Route::put('/edit-barang',[BarangController::class, 'editBarang'])->name('editBarang');
 Route::post('/hapus-barang',[BarangController::class, 'hapusBarang'])->name('hapusBarang');
 Route::post('/detail-barang/{id}', [BarangController::class, 'detailBarang'])->name('detailBarang');
+
+
+Route::get('/jenisBarang', [JenisBarangController::class, 'index'])->name('jenisBarang');
+Route::post('/tambah-jenis-barang', [JenisBarangController::class, 'tambah'])->name('tambahJenisBarang');
+Route::post('/edit-jenis-barang', [JenisBarangController::class, 'edit'])->name('editJenisBarang');
+Route::post('/hapus-jenis-barang', [JenisBarangController::class, 'hapus'])->name('hapusJenisBarang');
+
+
 
 Route::get('/barangMasuk', [BarangController::class, 'barangMasuk'])->name('barangMasuk');
 Route::post('/tambah-barang-masuk',[BarangController::class, 'tambahBarangMasuk'])->name('tambahBarangMasuk');
@@ -59,6 +69,8 @@ Route::post('/tambah-supplier', [SupplierController::class, 'tambahSupplier'])->
 
 Route::get('/reparasiBarang', [ReparasiBarangController::class, 'index'])->name('reparasiBarang');
 Route::post('/tambah-reparasiBarang', [ReparasiBarangController::class, 'tambahReparasiBarang'])->name('tambahReparasiBarang');
+Route::post('/edit-reparasiBarang', [ReparasiBarangController::class, 'editReparasiBarang'])->name('editReparasiBarang');
+Route::post('/hapus-reparasiBarang', [ReparasiBarangController::class, 'hapusReparasiBarang'])->name('hapusReparasiBarang');
 
 Route::get('/permohonan', [PengajuanController::class, 'index'])->name('permohonan');
 
@@ -74,6 +86,7 @@ Route::post('/edit-stokOpname', [StokOpnameController::class, 'edit'])->name('ed
 Route::post('/hapus-stokOpname', [StokOpnameController::class, 'delete'])->name('hapusStokOpname');
 
 Route::get('/laporanBarangMasuk', [BarangMasukController::class, 'filter'])->name('laporanBarangMasuk');
+Route::get('/laporanBarangKeluar', [BarangKeluarController::class, 'filter'])->name('laporanBarangKeluar');
 
 Route::post('/hapus-stokOpname', [StokOpnameController::class, 'delete'])->name('hapusStokOpname');
 
@@ -82,13 +95,11 @@ Route::get('/tambah-barang', function () {
     return view('pages/staff/permohonan');
 })->name('tambahBarang');
 
-Route::get('/jenisBarang', function () {
-    return view('pages/admin/jenisBarang');
-})->name('jenisBarang');
+// Route::get('/jenisBarang', function () {
+//     return view('pages/admin/jenisBarang');
+// })->name('jenisBarang');
 
-Route::get('/tambah-jenis-barang', function () {
-    return view('pages/staff/permohonan');
-})->name('tambahJenisBarang');
+
 
 
 
@@ -98,9 +109,9 @@ Route::get('/tambah-jenis-barang', function () {
 //     return view('pages/admin/laporanBarangMasuk');
 // })->name('laporanBarangMasuk');
 
-Route::get('/laporanBarangKeluar', function () {
-    return view('pages/admin/laporanBarangKeluar');
-})->name('laporanBarangKeluar');
+// Route::get('/laporanBarangKeluar', function () {
+//     return view('pages/admin/laporanBarangKeluar');
+// })->name('laporanBarangKeluar');
 
 
 

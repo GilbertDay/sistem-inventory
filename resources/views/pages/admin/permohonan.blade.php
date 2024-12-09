@@ -37,7 +37,10 @@
                                 <th scope="col" class="text-center align-middle">Tanggal Pengajuan</th>
                                 <th scope="col" class="text-center align-middle">Jumlah Barang</th>
                                 <th scope="col" class="text-center align-middle">Nama Pemohon</th>
+                                @if(Auth::user()->type == '1' || Auth::user()->type == '2')
                                 <th scope="col" class="text-center align-middle">Keterangan</th>
+                                @endif
+                                <th scope="col" class="text-center align-middle">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +55,10 @@
                                     <td class="px-3 text-center bg-red-500">
                                     {{$pengajuan->keterangan == 0 ? 'Menunggu' : ($pengajuan->keterangan == 1 ? 'Diterima' : 'Ditolak')}}
                                     </td>
+                                    <td class="text-center"><button type="button" class="px-2.5 py-2 text-white bg-blue-600 rounded-lg"  data-bs-toggle="modal"
+                                        data-bs-target="#detailPermohonanan-{{ $pengajuan->id }}">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button></td>
                                 @elseif($pengajuan->keterangan == 0)
                                 <td class="flex justify-center gap-2">
                                     <form action="{{ route('pengajuanAccept', $pengajuan->id) }}" method="POST">
@@ -74,13 +81,14 @@
                                     </button>
                                 </td>
                                 @else
+
                                 <td>
                                     <div class="{{ $pengajuan->keterangan == 1 ? 'bg-green-500' : 'bg-red-500' }} px-3 text-center text-white rounded-2xl">
                                         {{ $pengajuan->keterangan == 1 ? 'Diterima' : 'Ditolak' }}
                                     </div>
-
                                 </td>
                                 @endif
+
                             </tr>
                             @endforeach
 

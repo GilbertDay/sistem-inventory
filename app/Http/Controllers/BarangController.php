@@ -28,6 +28,8 @@ class BarangController extends Controller
         $barang->user_id = Auth::user()->id;
         $barang->min_stok = $req->input('stok-min');
         $barang->lokasi_barang = $req->input('lokasi_barang');
+        $barang->label_barang = $req->input('label_barang');
+        $barang->spesifikasi_barang = $req->input('spesifikasi_barang');
         $barang->jenis_barang_id = $req->input('jenis_barang');
         $barang->save();
         return redirect()->back();
@@ -73,10 +75,10 @@ class BarangController extends Controller
 
     public function hapusBarang(Request $req){
         $barang = Barang::findOrFail($req->input('id'));
-        $barang->delete();
+        $barang->status = 'nonactive';
+        $barang->save();
         return redirect()->back()->with('success', 'Sukses menghapus data barang');
     }
-
 
     public function editBarang(Request $req){
         $barang = Barang::findOrFail($req->input('id'));
@@ -84,10 +86,18 @@ class BarangController extends Controller
         $barang->stok = $req->input('jumlah_barang');
         $barang->min_stok = $req->input('stok-min');
         $barang->lokasi_barang = $req->input('lokasi_barang');
+        $barang->spesifikasi_barang = $req->input('spesifikasi_barang');
         $barang->jenis_barang_id = $req->input('jenis_barang');
         $barang->save();
         return redirect()->back()->with('success', 'Sukses mengedit data barang');
 
+    }
+    public function editBarangMasuk(Request $req){
+        $barangMasuk = BarangMasuk::find($req->id);
+        $barangMasuk->tanggal = $req->tanggal;
+        $barangMasuk->jumlah = $req->jumlah;
+        $barangMasuk->save();
+        return redirect()->back();
     }
 
     public function editBarangKeluar(Request $req){

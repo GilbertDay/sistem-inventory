@@ -62,10 +62,11 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Nama Barang</th>
-                                <th scope="col">Spesifikasi Barang</th>
-                                <th scope="col">Label Barang</th>
                                 <th scope="col">Tanggal</th>
+                                <th scope="col">Nama Barang</th>
+                                <th scope="col">Lokasi Barang</th>
+                                <th scope="col">Label Barang</th>
+                                <!-- <th scope="col">Spesifikasi Barang</th> -->
                                 <th scope="col">Jumlah Masuk</th>
                                 <th scope="col">Supplier</th>
                                 <th scope="col">Aksi</th>
@@ -76,10 +77,11 @@
                                 @foreach($barangMasuk as $key => $item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $item->barang->nama_barang }}</td>
-                                        <td class="overflow-hidden text-ellipsis text-nowrap" style="max-width: 200px;">{{ $item->barang->spesifikasi_barang }}</td>
-                                        <td >{{ $item->barang->label_barang }}</td>
                                         <td>{{ Carbon::parse($item->tanggal)->format('d M Y') }}</td>
+                                        <td>{{ $item->barang->nama_barang }}</td>
+                                        <td>{{ $item->barang->lokasi_barang }}</td>
+                                        <!-- <td class="overflow-hidden text-ellipsis text-nowrap" style="max-width: 200px;">{{ $item->barang->spesifikasi_barang }}</td> -->
+                                        <td >{{ $item->barang->label_barang }}</td>
                                         <td>{{ $item->jumlah }}</td>
                                         <td>{{ $item->supplier->nama }}</td>
 

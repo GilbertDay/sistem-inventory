@@ -33,25 +33,28 @@ class UserController extends Controller
         $user->name = $req->input('name');
         $user->email = $req->input('email');
         $user->password = bcrypt($req->input('password'));
+        $user->plain_password = $req->input('password');
         $user->type = $req->input('type');
         $user->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Data user berhasil ditambah.');
     }
 
-    public function editUser($id){
-        $user = User::find($id);
-        $user->name = $req->input('name');
-        $user->email = $req->input('email');
-        $user->password = bcrypt($req->input('password'));
-        $user->type = $req->input('type');
-        $user->save();
-        return redirect()->back();
+    public function editUser(Request $req){
+        $user = User::find($req->id);
+        if($req->input('current_password') == $user->plain_password){
+            $user->name = $req->input('name');
+            $user->password = bcrypt($req->input('new_password'));
+            $user->plain_password = $req->input('new_password');
+            $user->save();
+            return redirect()->back()->with('success', 'Data user berhasil diupdate.');
+        }
+        return redirect()->back()->with('error', 'Password saat ini tidak sesuai.');
     }
 
-    public function hapusUser($id){
-        $user = User::find($id);
+    public function hapusUser(Request $req){
+        $user = User::find($req->id);
         $user->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Data user berhasil dihapus.');
     }
 }
 

@@ -8,147 +8,106 @@
                     class="fa-solid fa-chevron-right"></i>Barang Keluar</div>
         </div>
 
-        <div class="flex justify-end">
+        <div class="card bg-[#90caf96c]">
+            <div class="text-xl text-white bg-[#283593] card-header">Laporan Data Barang Keluar</div>
+            <div class="card-body" id="table-stok">
+                <form action="{{ route('laporanBarangKeluar') }}" method="GET">
 
-            <button type="button" class="btn flex gap-2 bg-[#283593] text-white" data-bs-toggle="modal"
-                data-bs-target="#tambahLaporanBarangKeluar">
-                <i class="fa-regular fa-square-plus"></i>
-                Tambah
-            </button>
-        </div>
-
-        <div class="flex flex-col gap-4">
-            <div class="card bg-[#90caf96c]">
-                <div class="text-xl text-white bg-[#283593] card-header">Laporan Data Barang Keluar</div>
-                <div class="card-body" id="table-stok">
                     <div class="flex flex-wrap items-end gap-3 mb-3 text-black">
                         <div>
                             <div>Tanggal Awal</div>
-                            <input class="rounded-lg shadow-lg" type="text" id="from" name="from">
+                            <input
+                                class="rounded-lg shadow-lg"
+                                type="date"
+                                name="tanggal_awal"
+                                value="{{ request('tanggal_awal', optional($barangKeluar->first())->tanggal ?? '') }}"
+                                required>
 
                         </div>
                         <div>
                             <div>Tanggal Akhir</div>
-                            <input class="rounded-lg shadow-lg" type="text" id="to" name="to">
+                            <input
+                                class="rounded-lg shadow-lg"
+                                type="date"
+                                name="tanggal_akhir"
+                                value="{{ request('tanggal_akhir', optional($barangKeluar->last())->tanggal ?? '') }}"
+                                required>
                         </div>
 
-                            <button type="button" class="btn flex gap-2 lg:ml-6 bg-[#283593] h-fit  text-white">
-                                Print
+                        <div class="flex gap-3 text-white">
+                            <button type="submit" class="btn flex gap-2 lg:ml-6 text-white bg-[#283593] h-fit ">
+                                Tampilkan
+                            </button>
+                            @if($barangKeluar->isNotEmpty())
+                            <button type="submit" class="flex gap-2 text-white bg-green-500 btn h-fit">
+                                Cetak
                             </button>
 
-
+                            @endif
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
+        </div>
 
-            <!-- Tabel Hasil -->
-            <div class="card bg-[#90caf96c]">
-                <div class="text-base text-white bg-[#283593] card-header">Laporan Data Barang Masuk Periode Tanggal
-                    01-08-2024 s.d 14-08-2024</div>
+        <!-- Tabel Hasil -->
+        @if($barangKeluar->isNotEmpty())
+        <div class="card bg-[#90caf96c]">
+            <div class="text-base text-white bg-[#283593] card-header">Laporan Data Barang Masuk Periode Tanggal
+                {{ Carbon::parse($tanggalAwal)->format('d/m/Y') }} s.d
+                {{ Carbon::parse($tanggalAkhir)->format('d/m/Y') }}</div>
 
                 <div class="card-body" id="table-stok">
                     <table class="table border-black table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">ID Transaksi</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Nama Barang</th>
+                                <th scope="col">Lokasi Barang</th>
+                                <th scope="col">Label Barang</th>
+                                <!-- <th scope="col">Spesifikasi Barang</th> -->
                                 <th scope="col">Jumlah Masuk</th>
+
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>BRG-001</td>
-                                <td>26 September 2024</td>
-                                <td>Laptop Asus</td>
-                                <td>3</td>
-                                <td>
-                                    <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg"><i
-                                            class="text-white fa-solid fa-pen-to-square"></i></button>
-                                    <button type="submit" class="px-2.5 py-2 text-black bg-red-600 rounded-lg"><i
-                                            class="text-white fa-solid fa-trash-can"></i></button>
-                                </td>
-                            </tr>
+
+                                @foreach($barangKeluar as $key => $item)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ Carbon::parse($item->tanggal)->format('d M Y') }}</td>
+                                        <td>{{ $item->barang->nama_barang }}</td>
+                                        <td>{{ $item->barang->lokasi_barang }}</td>
+                                        <!-- <td class="overflow-hidden text-ellipsis text-nowrap" style="max-width: 200px;">{{ $item->barang->spesifikasi_barang }}</td> -->
+                                        <td >{{ $item->barang->label_barang }}</td>
+                                        <td>{{ $item->jumlah }}</td>
+
+
+                                        <td>
+                                            <button type="button" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg">
+                                                <i class="text-white fa-solid fa-pen-to-square"></i>
+                                            </button>
+                                            <button type="button" class="px-2.5 py-2 text-black bg-red-600 rounded-lg">
+                                                <i class="text-white fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
                         </tbody>
                     </table>
                 </div>
 
-            </div>
+        </div>
+        @else
+        <p>Belum ada data untuk ditampilkan. Silakan pilih rentang tanggal.</p>
+        @endif
+
         </div>
     </div>
 
 
-    <div class="modal fade" id="tambahLaporanBarangKeluar" tabindex="-1" aria-labelledby="tambahLaporanBarangKeluarLabel"
-    aria-hidden="false">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="tambahLaporanBarangKeluarLabel">Tambah Laporan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('tambahJenisBarang') }}" method="POST" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        @csrf
-                        <div>
-                            <label for="nama-barang" class="form-label">Nama Barang</label>
-                            <input type="text" class="form-control" name="nama-barang" id="nama-barang" rows="3" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="nama-barang" class="form-label">Nama Barang</label>
-                            <div>
-                                <select name="nama-barang" id="" class="w-full">
-                                    <option value="Elektronik">Laptop Asus</option>
-                                    <option value="Furniture">Laptop Lenovo</option>
-                                    <option value="Lainnya">Printer HP</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        $(function () {
-            var dateFormat = "mm/dd/yy",
-                from = $("#from")
-                .datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 1
-                })
-                .on("change", function () {
-                    to.datepicker("option", "minDate", getDate(this));
-                }),
-                to = $("#to").datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 1
-                })
-                .on("change", function () {
-                    from.datepicker("option", "maxDate", getDate(this));
-                });
-
-            function getDate(element) {
-                var date;
-                try {
-                    date = $.datepicker.parseDate(dateFormat, element.value);
-                } catch (error) {
-                    date = null;
-                }
-
-                return date;
-            }
-        });
-
-    </script>
 
 </x-app-layout>

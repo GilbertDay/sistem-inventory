@@ -33,19 +33,20 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nama Barang</th>
-                                <th scope="col">Jenis Barang</th>
-                                <th scope="col">Label Barang</th>
-                                <th scope="col">Lokasi Barang</th>
+
+                                <th scope="col">Tanggal Penghapusan</th>
+                                <th scope="col">Jumlah</th>
+                                <th scope="col">Keterangan</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($penghapusanBarangs as $penghapusanBarang)
                             <tr>
-                                <td>Laptop Asus</td>
-                                <td>Elektronik</td>
-                                <td>Laptop 1</td>
-                                <td>Rak 32</td>
+                                <td>{{$penghapusanBarang->barang->nama_barang}}</td>
+                                <td>{{Carbon::parse($penghapusanBarang->tanggal_hapus)->format('d F Y')}}</td>
+                                <td>{{$penghapusanBarang->jumlah}}</td>
+                                <td>{{$penghapusanBarang->keterangan}}</td>
                                 <td>
                                     <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg"><i
                                             class="text-white fa-solid fa-pen-to-square"></i></button>
@@ -72,20 +73,30 @@
                 <form action="{{ route('tambahPenghapusanBarang') }}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
-                            <div class="flex flex-col mb-3" >
-                                <label for="nama-barang" class="form-label">Nama Barang</label>
-                                @if(isset($barangs) && $barangs->count() > 0)
-                                    <select name="barang_id" class="w-full">
-                                        @foreach($barangs as $barang)
-                                            <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
-                                        @endforeach
-                                    </select>
-                                @else
-                                    <input type="text" value="Tidak ada barang" readonly/>
-                                @endif
+                        <div class="flex flex-col mb-3" >
+                            <label for="nama-barang" class="form-label">Nama Barang</label>
+                            @if(isset($barangs) && $barangs->count() > 0)
+                                <select name="barang_id" class="w-full">
+                                    @foreach($barangs as $barang)
+                                        <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <input type="text" value="Tidak ada barang" readonly/>
+                            @endif
 
+                        </div>
+
+                        <div class="flex gap-3">
+                            <div>
+                                <label for=" ">Tanggal</label>
+                                <input type="date" name="tanggal" class="w-full">
                             </div>
-
+                            <div>
+                                <label for=" ">Jumlah</label>
+                                <input type="number" name="jumlah" class="w-full">
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label for="ket-hapus" class="form-label">Keterangan</label>
                             <div>

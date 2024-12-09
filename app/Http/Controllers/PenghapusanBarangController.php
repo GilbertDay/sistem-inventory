@@ -24,7 +24,8 @@ class PenghapusanBarangController extends Controller
 
         $penghapusanBarang = new PenghapusanBarang();
         $penghapusanBarang->barang_id = $req->barang_id;
-        $penghapusanBarang->tanggal_hapus = Carbon::now();
+        $penghapusanBarang->tanggal_hapus = $req->tanggal_hapus;
+        $penghapusanBarang->jumlah = $req->jumlah;
         $penghapusanBarang->keterangan = $req->keterangan;
         $penghapusanBarang->save();
 

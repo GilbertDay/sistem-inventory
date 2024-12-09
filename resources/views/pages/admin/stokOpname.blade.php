@@ -65,6 +65,7 @@
                         <tr>
                             <th scope="col" class="text-center align-middle">No</th>
                             <th scope="col" class="text-center align-middle">Nama Barang</th>
+                            <th scope="col" class="text-center align-middle">Spesifikasi Barang</th>
                             <th scope="col" class="text-center align-middle">Lokasi Barang</th>
                             <th scope="col" class="text-center align-middle">Tanggal</th>
                             <th scope="col" class="text-center align-middle">Jumlah Fisik</th>
@@ -82,26 +83,26 @@
                         <tr>
                             <td class="text-center align-middle">{{$loop->iteration}}</td>
                             <td class="align-middle">{{$so->barang->nama_barang}}</td>
+                            <td class="align-middle">{{$so->barang->spesifikasi_barang}}</td>
                             <td class="align-middle">{{$so->barang->lokasi_barang}}</td>
                             <td class="align-middle">{{Carbon::parse($so->tanggal)->format('d F Y')}}</td>
                             <td class="text-center align-middle">{{$so->jumlah_fisik}}</td>
                             @if(Auth::user()->type == 0)
                             <td class="text-center align-middle">{{$so->barang->stok}}</td>
                             <td class="text-center align-middle">{{$so->jumlah_fisik - $so->barang->stok}}</td>
-                            @if($so->jumlah_fisik % $so->barang->stok == 0)
-                            <td class="text-center align-middle">
-                                <div class="px-2.5 py-1 bg-green-500 rounded-xl text-center">Sesuai</d>
-                            </td>
-                            @else
-                            <td class="flex justify-center gap-2 text-center text-white">
-                                <div class="px-2.5 py-1 bg-red-500 rounded-xl flex items-center">Tidak Sesuai</div>
-                                <button type="button" class="px-2.5 py-2   bg-blue-600 rounded-lg hover:bg-white hover:text-black"  data-bs-toggle="modal"
-                                    data-bs-target="#sesuaikanStokOpname-{{ $so->id }}">
-                                   Sesuaikan Stok </i>
-                                    </button>
-                            </td>
-
-                            @endif
+                                @if($so->jumlah_fisik % $so->barang->stok == 0)
+                                <td class="text-center align-middle">
+                                    <div class="px-2.5 py-1 bg-green-500 rounded-xl text-center">Sesuai</d>
+                                </td>
+                                @else
+                                <td class="flex justify-center gap-2 text-center text-white">
+                                    <div class="px-2.5 py-1 bg-red-500 rounded-xl flex items-center">Tidak Sesuai</div>
+                                    <button type="button" class="px-2.5 py-2   bg-blue-600 rounded-lg hover:bg-white hover:text-black"  data-bs-toggle="modal"
+                                        data-bs-target="#sesuaikanStokOpname-{{ $so->id }}">
+                                    Sesuaikan Stok </i>
+                                        </button>
+                                </td>
+                                @endif
                             @else
                             <td class="text-center ">
                                 <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg"><i
