@@ -276,4 +276,30 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchBarang');
+            const table = document.querySelector('table tbody');
+            const rows = table.querySelectorAll('tr');
+
+            // Event listener untuk input pencarian
+            searchInput.addEventListener('keyup', function() {
+                const query = searchInput.value.toLowerCase(); // Ambil input dan ubah ke lowercase
+
+                // Loop melalui setiap baris di tabel
+                rows.forEach(function(row) {
+                    const namaBarangCell = row.querySelector('td:nth-child(1)'); // Ambil kolom Nama Barang
+                    if (namaBarangCell) {
+                        const namaBarang = namaBarangCell.textContent.toLowerCase(); // Ambil nama barang dan ubah ke lowercase
+                        if (namaBarang.includes(query)) {
+                            row.style.display = ''; // Tampilkan baris jika cocok
+                        } else {
+                            row.style.display = 'none'; // Sembunyikan baris jika tidak cocok
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </x-app-layout>

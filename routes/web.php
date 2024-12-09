@@ -91,9 +91,7 @@ Route::get('/laporanBarangKeluar', [BarangKeluarController::class, 'filter'])->n
 Route::post('/hapus-stokOpname', [StokOpnameController::class, 'delete'])->name('hapusStokOpname');
 
 
-Route::get('/tambah-barang', function () {
-    return view('pages/staff/permohonan');
-})->name('tambahBarang');
+
 
 // Route::get('/jenisBarang', function () {
 //     return view('pages/admin/jenisBarang');
