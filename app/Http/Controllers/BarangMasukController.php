@@ -29,4 +29,5 @@ class BarangMasukController extends Controller
         return view('pages/admin/laporanBarangMasuk', compact('barangMasuk', 'tanggalAwal', 'tanggalAkhir'));
     }
 
+
 }
