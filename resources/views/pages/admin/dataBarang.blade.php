@@ -43,7 +43,7 @@
                                 @endif
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="barangTableBody">
                             @foreach($barangs as $barang)
                             <tr>
                                 <td>{{ $barang->nama_barang }}</td>
@@ -283,5 +283,18 @@
         </div>
     </div>
 
-    
+    <script>
+        document.getElementById('searchBarang').addEventListener('input', function() {
+        var searchTerm = this.value.toLowerCase(); // Mengambil nilai pencarian
+        var rows = document.querySelectorAll('#barangTableBody tr'); // Mengambil semua baris tabel
+            rows.forEach(function(row) {
+                var namaBarang = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // Mendapatkan nama barang pada kolom pertama
+                if (namaBarang.includes(searchTerm)) {
+                    row.style.display = ''; // Menampilkan baris yang sesuai
+                } else {
+                    row.style.display = 'none'; // Menyembunyikan baris yang tidak sesuai
+                }
+            });
+        });
+    </script>
 </x-app-layout>

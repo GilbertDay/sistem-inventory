@@ -25,41 +25,41 @@
                 <input type="text" class="w-52" id="searchBarang">
             </div>
         </div>
-        <div class="">
-            <div class="card bg-[#90CAF9]" id="laporan-masuk">
-                <div class="text-xl text-white bg-[#283593] card-header">Data Barang Penghapusan</div>
-                <div class="card-body">
-                    <table class="table border-black table-bordered ">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nama Barang</th>
-
-                                <th scope="col">Tanggal Penghapusan</th>
-                                <th scope="col">Jumlah</th>
-                                <th scope="col">Keterangan</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($penghapusanBarangs as $penghapusanBarang)
-                            <tr>
-                                <td>{{$penghapusanBarang->barang->nama_barang}}</td>
-                                <td>{{Carbon::parse($penghapusanBarang->tanggal_hapus)->format('d F Y')}}</td>
-                                <td>{{$penghapusanBarang->jumlah}}</td>
-                                <td>{{$penghapusanBarang->keterangan}}</td>
-                                <td>
-                                    <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg"><i
-                                            class="text-white fa-solid fa-pen-to-square"></i></button>
-                                    <button type="submit" class="px-2.5 py-2 text-black bg-red-600 rounded-lg"><i
-                                            class="text-white fa-solid fa-trash-can"></i></button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+        <div class="card bg-[#90CAF9]" id="penghapusanBarang">
+            <div class="text-xl text-white bg-[#283593] card-header">Data Barang Penghapusan</div>
+            <div class="card-body">
+                <table class="table border-black table-bordered ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nama Barang</th>
+                            <th scope="col">Tanggal Penghapusan</th>
+                            <th scope="col">Jumlah</th>
+                            <th scope="col">Keterangan</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="barangTableBody">
+                        @foreach($penghapusanBarangs as $penghapusanBarang)
+                        <tr>
+                            <td>{{$penghapusanBarang->barang->nama_barang}}</td>
+                            <td>{{Carbon::parse($penghapusanBarang->tanggal_hapus)->format('d F Y')}}</td>
+                            <td>{{$penghapusanBarang->jumlah}}</td>
+                            <td>{{$penghapusanBarang->keterangan}}</td>
+                            <td>
+                                <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg">
+                                    <i class="text-white fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button type="submit" class="px-2.5 py-2 text-black bg-red-600 rounded-lg">
+                                    <i class="text-white fa-solid fa-trash-can"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
+
     </div>
 
     <div class="modal fade" id="tambahPenghapusanBarang" tabindex="-1" aria-labelledby="tambahPenghapusanBarangLabel"
@@ -115,4 +115,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('searchBarang').addEventListener('input', function() {
+        var searchTerm = this.value.toLowerCase(); // Mengambil nilai pencarian
+        var rows = document.querySelectorAll('#barangTableBody tr'); // Mengambil semua baris tabel
+            rows.forEach(function(row) {
+                var namaBarang = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // Mendapatkan nama barang pada kolom pertama
+                if (namaBarang.includes(searchTerm)) {
+                    row.style.display = ''; // Menampilkan baris yang sesuai
+                } else {
+                    row.style.display = 'none'; // Menyembunyikan baris yang tidak sesuai
+                }
+            });
+        });
+    </script>
 </x-app-layout>
