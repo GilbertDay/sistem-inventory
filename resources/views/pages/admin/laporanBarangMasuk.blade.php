@@ -39,9 +39,9 @@
                                 Tampilkan
                             </button>
                             @if($barangMasuk->isNotEmpty())
-                            <button type="submit" class="flex gap-2 text-white bg-green-500 btn h-fit">
+                            <a href="{{ route('cetakLaporan', ['tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir, 'tipe' => 'barangMasuk']) }}" class="flex gap-2 text-white bg-green-500 btn h-fit">
                                 Cetak
-                            </button>
+                            </a>
 
                             @endif
                         </div>
@@ -80,7 +80,6 @@
                                         <td>{{ Carbon::parse($item->tanggal)->format('d M Y') }}</td>
                                         <td>{{ $item->barang->nama_barang }}</td>
                                         <td>{{ $item->barang->lokasi_barang }}</td>
-                                        <!-- <td class="overflow-hidden text-ellipsis text-nowrap" style="max-width: 200px;">{{ $item->barang->spesifikasi_barang }}</td> -->
                                         <td >{{ $item->barang->label_barang }}</td>
                                         <td>{{ $item->jumlah }}</td>
                                         <td>{{ $item->supplier->nama }}</td>

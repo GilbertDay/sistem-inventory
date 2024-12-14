@@ -39,10 +39,9 @@
                                 Tampilkan
                             </button>
                             @if($barangKeluar->isNotEmpty())
-                            <button type="submit" class="flex gap-2 text-white bg-green-500 btn h-fit">
+                            <a href="{{ route('cetakLaporan', ['tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir, 'tipe' => 'barangKeluar']) }}" class="flex gap-2 text-white bg-green-500 btn h-fit">
                                 Cetak
-                            </button>
-
+                            </a>
                             @endif
                         </div>
                     </div>

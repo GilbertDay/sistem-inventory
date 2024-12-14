@@ -13,7 +13,11 @@ class PengajuanController extends Controller
     //
 
     public function index(){
-        $pengajuans = Pengajuan::all();
+        if(Auth::user()->type != 2 ){
+            $pengajuans = Pengajuan::all();
+        }else{
+            $pengajuans = Pengajuan::where('user_id', Auth::user()->id)->get();
+        }
         $jenis_barangs = JenisBarang::all();
         return view('pages/admin/permohonan', compact('pengajuans','jenis_barangs'));
     }
@@ -33,7 +37,7 @@ class PengajuanController extends Controller
     public function accept($id)
     {
         $pengajuan = Pengajuan::findOrFail($id);
-        $pengajuan->keterangan = 1; // Set to "Diterima"
+        $pengajuan->keterangan = 1;
         $pengajuan->save();
 
         return redirect()->back()->with('success', 'Pengajuan ' . $pengajuan->nama_barang . ' telah diterima.');
@@ -43,7 +47,7 @@ class PengajuanController extends Controller
     public function reject($id)
     {
         $pengajuan = Pengajuan::findOrFail($id);
-        $pengajuan->keterangan = 2; // Set to "Ditolak"
+        $pengajuan->keterangan = 2;
         $pengajuan->save();
 
         return redirect()->back()->with('success', 'Pengajuan ' . $pengajuan->nama_barang . ' telah ditolak.');

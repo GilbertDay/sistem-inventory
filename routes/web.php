@@ -12,6 +12,7 @@ use App\Http\Controllers\StokOpnameController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\JenisBarangController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\Controller;
 
 /*
@@ -66,6 +67,8 @@ Route::put('/pengajuan/{id}/reject', [PengajuanController::class, 'reject'])->na
 
 Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
 Route::post('/tambah-supplier', [SupplierController::class, 'tambahSupplier'])->name('tambahSupplier');
+Route::post('/edit-supplier', [SupplierController::class, 'editSupplier'])->name('editSupplier');
+Route::post('/hapus-supplier', [SupplierController::class, 'hapusSupplier'])->name('hapusSupplier');
 
 Route::get('/reparasiBarang', [ReparasiBarangController::class, 'index'])->name('reparasiBarang');
 Route::post('/tambah-reparasiBarang', [ReparasiBarangController::class, 'tambahReparasiBarang'])->name('tambahReparasiBarang');
@@ -90,10 +93,11 @@ Route::get('/laporanBarangKeluar', [BarangKeluarController::class, 'filter'])->n
 
 Route::post('/hapus-stokOpname', [StokOpnameController::class, 'delete'])->name('hapusStokOpname');
 
+Route::get('/laporan', [LaporanController::class, 'cetak'])->name('cetakLaporan');
 
-Route::get('/tambah-barang', function () {
-    return view('pages/staff/permohonan');
-})->name('tambahBarang');
+// Route::get('/tambah-barang', function () {
+//     return view('pages/staff/permohonan');
+// })->name('tambahBarang');
 
 // Route::get('/jenisBarang', function () {
 //     return view('pages/admin/jenisBarang');
@@ -105,9 +109,7 @@ Route::get('/tambah-barang', function () {
 
 
 
-// Route::get('/laporanBarangMasuk', function () {
-//     return view('pages/admin/laporanBarangMasuk');
-// })->name('laporanBarangMasuk');
+
 
 // Route::get('/laporanBarangKeluar', function () {
 //     return view('pages/admin/laporanBarangKeluar');
@@ -115,9 +117,9 @@ Route::get('/tambah-barang', function () {
 
 
 
-Route::get('/peminjam', function () {
-    return view('pages/admin/peminjam');
-})->name('peminjam');
+// Route::get('/peminjam', function () {
+//     return view('pages/admin/peminjam');
+// })->name('peminjam');
 
 
 

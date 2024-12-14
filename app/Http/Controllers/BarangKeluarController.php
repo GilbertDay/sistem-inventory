@@ -22,7 +22,6 @@ class BarangKeluarController extends Controller
         // Filter berdasarkan tanggal
         $barangKeluar = BarangKeluar::whereBetween('tanggal', [$tanggalAwal, $tanggalAkhir])->get();
 
-
         // Kembalikan data ke view
         return view('pages/admin/laporanBarangKeluar', compact('barangKeluar', 'tanggalAwal', 'tanggalAkhir'));
     }

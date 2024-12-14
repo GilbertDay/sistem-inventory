@@ -23,9 +23,11 @@
         x-transition:leave-end="opacity-0" x-cloak>
         <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200 dark:border-gray-700/60">
             <div class="font-medium text-gray-800 dark:text-gray-100">{{ Auth::user()->name }}</div>
-            <div class="text-xs italic text-gray-500 dark:text-gray-400">
-                @if(Auth::user()->type == 0)
-                Users
+            <div class="pt-2 text-xs italic text-gray-400 dark:text-gray-400">
+                @if(Auth::user()->type == 2)
+                Staff Umum
+                @elseif(Auth::user()->type == 0)
+                Kepala Departemen IT
                 @else
                 Administrator
                 @endif

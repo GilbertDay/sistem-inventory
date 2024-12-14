@@ -18,7 +18,8 @@ class Barang extends Model
         'stok',
         'min_stok',
         'user_id',
-        'lokasi_barang'
+        'lokasi_barang',
+        'status',
     ];
 
 

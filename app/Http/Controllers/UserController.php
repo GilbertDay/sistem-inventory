@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('type', 'desc')->get();
+        $users = User::where('status', 'active')->orderBy('type', 'desc')->get();
         // dd($users);
         return view('pages/admin/users', compact('users'));
     }
@@ -53,7 +53,8 @@ class UserController extends Controller
 
     public function hapusUser(Request $req){
         $user = User::find($req->id);
-        $user->delete();
+        $user->status = 'nonactive';
+        $user->save();
         return redirect()->back()->with('success', 'Data user berhasil dihapus.');
     }
 }

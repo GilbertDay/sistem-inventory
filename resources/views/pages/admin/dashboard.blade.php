@@ -69,7 +69,7 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$mb->nama_barang}}</td>
-                        <td>{{$mb->jenis_barang->nama}}</td>
+                        <td>{{$mb->jenis_barang->nama ?? '-'}}</td>
                         <td>{{$mb->stok}}</td>
                     </tr>
                     @endforeach

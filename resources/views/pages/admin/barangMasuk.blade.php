@@ -83,9 +83,10 @@
                             <div class="w-1/2">
                                 <label for="barang_id" class="form-label">Nama Barang</label>
                                 <div >
-                                    <select name="barang_id" id="" class="w-full" >
+                                    <select name="barang_id" id="barang" class="w-full" required >
+                                        <option value="">Pilih Barang</option>
                                         @foreach($barangs as $barang)
-                                            <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                            <option value="{{ $barang->id }}" data-stok="{{ $barang->stok }}" data-lokasi="{{ $barang->lokasi_barang }}">{{ $barang->nama_barang }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -104,11 +105,11 @@
                         <div class="flex w-full gap-3 mb-3">
                             <div class="w-1/2">
                                 <label for="tanggal" class="form-label">Tanggal</label>
-                                <input type="date" class="form-control" name="tanggal" id="tanggal">
+                                <input type="date" class="form-control" name="tanggal" id="tanggal" required>
                             </div>
                             <div class="w-1/2">
                                 <label for="jumlah" class="form-label">Jumlah Masuk</label>
-                                <input type="number" class="form-control" name="jumlah" id="jumlah">
+                                <input type="number" class="form-control" name="jumlah" id="jumlah" min="1" placeholder="Masukkan jumlah" required>
                             </div>
                         </div>
                     </div>
@@ -179,5 +180,30 @@
     </div>
     @endforeach
 
+
+    <script>
+        $(document).ready(function () {
+            $('#tambahBarangMasuk').on('shown.bs.modal', function () {
+                const $barangSelect = $('#barang');
+                const $jumlahInput = $('#jumlah');
+
+                // Event listener untuk perubahan barang yang dipilih
+                $barangSelect.on('change', function () {
+                    // Ambil stok dari barang yang dipilih
+                    const stok = $(this).find(':selected').data('stok');
+
+                    // Atur atribut max pada input jumlah
+                    $jumlahInput.attr('max', stok);
+
+                    // Opsional: Tampilkan pesan stok maksimal
+                    if(stok >= 0){
+                        $jumlahInput.attr('placeholder', `Maksimal: ${stok}`);
+                    }else{
+                        $jumlahInput.attr('placeholder', `Masukkan jumlah`);
+                    }
+                });
+            });
+        });
+    </script>
 
 </x-app-layout>

@@ -58,10 +58,34 @@
                                 <td>
                                     <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg"><i
                                             class="text-white fa-solid fa-pen-to-square"></i></button>
-                                    <button type="submit" class="px-2.5 py-2 text-black bg-red-600 rounded-lg"><i
+                                    <button type="submit" class="px-2.5 py-2 text-black bg-red-600 rounded-lg"  data-bs-toggle="modal"
+                                    data-bs-target="#hapusSupplier-{{ $supplier->id }}"><i
                                             class="text-white fa-solid fa-trash-can"></i></button>
                                 </td>
                             </tr>
+
+                            <div class="modal fade" id="hapusSupplier-{{$supplier->id}}" tabindex="-1" aria-labelledby="hapusSuppliersLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="hapusSuppliersLabel">Hapus Supplier</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="{{ route('hapusSupplier') }}" method="POST">
+                                            <div class="modal-body">
+                                                @csrf
+                                                <input type="text" class="form-control" id="id" name="id" value="{{$supplier->id}}" hidden>
+                                                <p>Apakah anda yakin ingin menghapus user ini?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>
@@ -94,8 +118,6 @@
                                 <label for="no_telp" class="form-label">Nomor Telepon</label>
                                 <input type="text" class="form-control" name="no_telp" id="no_telp">
                             </div>
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

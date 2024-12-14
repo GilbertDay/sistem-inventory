@@ -11,7 +11,8 @@ class JenisBarang extends Model
 
     protected $fillable = [
         'nama',
-        'id'
+        'id',
+        'status',
     ];
 
     protected $keyType = 'string';

@@ -37,6 +37,7 @@
                                 <th scope="col">Label Barang</th>
                                 <th scope="col">Spesifikasi Barang</th>
                                 <th scope="col">Lokasi Barang</th>
+                                <th scope="col">Jumlah Barang</th>
                                 @if(Auth::user()->type != '2')
                                 <th scope="col">Aksi</th>
                                 @endif
@@ -50,6 +51,7 @@
                                 <td>{{ $barang->label_barang }}</td>
                                 <td>{{ $barang->spesifikasi_barang }}</td>
                                 <td>{{ $barang->lokasi_barang }}</td>
+                                <td>{{ $barang->stok }}</td>
                                 @if(Auth::user()->type != '2')
                                 <td>
                                     <button type="submit" class="px-2.5 py-2 text-black bg-yellow-600 rounded-lg" data-bs-toggle="modal"
@@ -82,7 +84,11 @@
                     </div>
                     <div class="modal-body w">
                         <div class="flex items-center justify-center mb-10">
-                            <img class="" src="{{asset('images/laptop.jpg') }}" alt="" width="200">
+                            @if($brg->foto_barang)
+                            <img class="" src="{{ asset('storage/barang/'.$brg->foto_barang) }}" alt="" width="200">
+                            @else
+                            <div class="p-3 border-2 border-gray-500 h-300 w-200">Gambar Tidak Tersedia!</div>
+                            @endif
                         </div>
                         <div class="flex gap-4">
                             <div>
@@ -276,4 +282,6 @@
             </div>
         </div>
     </div>
+
+    
 </x-app-layout>
