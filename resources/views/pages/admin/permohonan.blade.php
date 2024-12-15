@@ -124,7 +124,7 @@
                         </div>
                         <div>
                             <div>{{$pengajuan->nama_barang}}</div>
-                            <div>{{$pengajuan->jenis_barang->nama}}</div>
+                            <div>{{$pengajuan->jenis_barang->nama ?? '-'}}</div>
                             <div class="overflow-hidden text-ellipsis text-nowrap" style="max-width: 500px;">
                                 {{$pengajuan->spesifikasi_barang}}
                             </div>
